@@ -34,6 +34,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation 'org.greenrobot:greendao:3.2.2'
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6' // 使用这个lib 使得手机上的浏览器可以查看数据库
+
 }
 
 greendao {

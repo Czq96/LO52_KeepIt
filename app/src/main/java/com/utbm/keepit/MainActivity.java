@@ -3,6 +3,9 @@ package com.utbm.keepit;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.utbm.keepit.backend.dao.DaoSession;
+import com.utbm.keepit.backend.dao.UserDao;
+import com.utbm.keepit.backend.entity.User;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -10,7 +13,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.utbm.keepit.MyApp;
+
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    private UserDao userDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +34,23 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        DaoSession daoSession = ((MyApp) getApplication()).getDaoSession();
+        userDao = daoSession.getUserDao();
+
+//        System.out.println("添加测试user admin admin");
+//        User testu = new User("adminxxx","adminxxx");
+//        userDao.insert(testu);
+//        System.out.println("插入完毕");
+        List<User> lu = userDao.loadAll();
+        for(User u : lu){
+            System.out.println(u.toString());
+        }
+        System.out.println("----------------------------------------------------------------");
+
+
     }
+
+
 
 }
