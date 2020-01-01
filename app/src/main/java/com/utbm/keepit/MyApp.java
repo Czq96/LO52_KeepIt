@@ -3,6 +3,7 @@ package com.utbm.keepit;
 import android.app.Application;
 
 import com.utbm.keepit.backend.dao.DaoMaster;
+
 import com.utbm.keepit.backend.dao.DaoSession;
 
 import org.greenrobot.greendao.database.Database;
