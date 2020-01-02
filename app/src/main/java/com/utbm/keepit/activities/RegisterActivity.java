@@ -1,15 +1,16 @@
-package com.utbm.KeepIt;
+package com.utbm.keepit.activities;
 
 import android.os.Bundle;
 import android.view.View;
 
-import com.utbm.KeepIt.Entity.User;
-import com.utbm.KeepIt.dao.UserDaoHelper;
-import com.utbm.KeepIt.views.InputView;
+import com.utbm.keepit.R;
+import com.utbm.keepit.backend.entity.User;
+import com.utbm.keepit.backend.service.UserService;
+import com.utbm.keepit.ui.views.InputView;
 
 public class RegisterActivity extends BaseActivity {
     InputView inputName, inputPwd, inputPwdConfirm;
-    private UserDaoHelper userDao;
+    UserService userService = new UserService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class RegisterActivity extends BaseActivity {
         User user = new User();
         user.setName(name);
         user.setPwd(pwd);
-        boolean isRegistered = userDao.insertUser(user);
+        boolean isRegistered = userService.createUser(user);
         if (!isRegistered) {
             return;
         }

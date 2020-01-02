@@ -1,9 +1,10 @@
-package com.utbm.KeepIt;
+package com.utbm.keepit.activities;
 
 import android.os.Bundle;
 import android.view.View;
 
-import com.utbm.KeepIt.views.InputView;
+import com.utbm.keepit.R;
+import com.utbm.keepit.ui.views.InputView;
 
 
 public class ChangePwdActivity extends BaseActivity {

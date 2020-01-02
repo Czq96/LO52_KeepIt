@@ -36,4 +36,7 @@ public class User {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
+    public String toString(){
+        return this.getName()+"    pwd:"+this.getPwd();
+    }
 }

@@ -4,14 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.utbm.keepit.R;
+import com.utbm.keepit.backend.entity.User;
 import com.utbm.keepit.backend.service.UserService;
 import com.utbm.keepit.ui.views.InputView;
 
-import static com.utbm.keepit.activities.MyApp.getContext;
+import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -30,10 +32,17 @@ public class LoginActivity extends AppCompatActivity {
         userNameInput = findViewById(R.id.activity_login_username_input);
         pwdInput = findViewById(R.id.activity_login_pwd_input);
 
+//        List<User> lu = userService.getUserDao().loadAll();
+//        for(User u : lu){
+//            System.out.println(u.toString());
+//        }
+//
+//        System.out.println(userService.checkPwd("admin","admin"));
+
     }
     public void onRegisterClick(View view){
-//        Intent intent=new Intent(this,RegisterActivity.class);
-//        startActivity(intent);
+        Intent intent=new Intent(this,RegisterActivity.class);
+        startActivity(intent);
     }
     /**
      * 登陆按扭验证登陆
@@ -42,16 +51,19 @@ public class LoginActivity extends AppCompatActivity {
     public void onCommitClick(View view){
 //        String user=username.getInputStr();
 //        String passwd=pwd.getInputStr();
-        String userName = userNameInput.toString();
-        String pwd = pwdInput.toString();
+        String userName = userNameInput.getInputStr();
+        String pwd = pwdInput.getInputStr();
 
-        if(userService.checkPwd(userName, pwd)){
+//        System.out.println("read from ui: "+ userName);
+//        System.out.println("read from ui: "+ pwd);
+
+        if(userService.checkPwd(userName, pwd)==true){
             Intent intent=new Intent(this,MainActivity.class);
             startActivity(intent);
             finish();
         }
         else {
-            return;
+            Toast.makeText(LoginActivity.this, "Wrong User name or password", Toast.LENGTH_SHORT).show();
         }
     }
 

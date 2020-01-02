@@ -1,4 +1,4 @@
-package com.utbm.KeepIt;
+package com.utbm.keepit.activities;
 
 
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.utbm.keepit.R;
 
 public class ProfileActivity extends BaseActivity {
 

@@ -2,7 +2,7 @@ package com.utbm.keepit.backend.service;
 
 import android.util.Log;
 
-import com.utbm.keepit.activities.MyApp;
+import com.utbm.keepit.MyApp;
 import com.utbm.keepit.backend.dao.DaoSession;
 import com.utbm.keepit.backend.dao.UserDao;
 import com.utbm.keepit.backend.entity.User;
@@ -68,7 +68,14 @@ public class UserService {
     }
 
     public boolean checkPwd(String name, String pwd){
-        return this.findUserByName(name).getPwd().equals(pwd);
+        User u = this.findUserByName(name);
+        if(u!=null)
+            return this.findUserByName(name).getPwd().equals(pwd);
+        else
+            return false;
     }
 
+    public UserDao getUserDao(){
+        return this.userDao;
+    }
 }

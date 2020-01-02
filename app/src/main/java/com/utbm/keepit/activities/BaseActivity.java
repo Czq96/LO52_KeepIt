@@ -1,5 +1,4 @@
-package com.utbm.KeepIt;
-
+package com.utbm.keepit.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
@@ -7,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
+
+import com.utbm.keepit.R;
 
 public class BaseActivity extends Activity {
     private ImageView navBack;
