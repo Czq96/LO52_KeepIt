@@ -1,8 +1,10 @@
-package com.utbm.keepit;
+package com.utbm.keepit.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.utbm.keepit.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -26,6 +28,7 @@ public class WelcomeActivity extends Activity {
             @Override
             public void run() {
                 toLogin();
+//                toMain();
             }
         },3*1000);
     }

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".activities.LoginActivity">
+    <include layout="@layout/nav_bar"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,8 +17,8 @@
     <com.utbm.KeepIt.views.InputView
         android:layout_width="match_parent"
         android:id="@+id/activity_login_username_input"
-        android:layout_height="@dimens/inputViewHeight"
-        android:layout_marginTop="@dimens/marginSize"
+        android:layout_height="@dimen/inputViewHeight"
+        android:layout_marginTop="@dimen/marginSize"
         app:input_icon="@mipmap/profile"
         app:input_hint="@string/username_hint"
         app:is_passwd="false"
@@ -28,7 +29,7 @@
     <com.utbm.KeepIt.views.InputView
         android:id="@+id/activity_login_pwd_input"
         android:layout_width="match_parent"
-        android:layout_height="@dimens/inputViewHeight"
+        android:layout_height="@dimen/inputViewHeight"
         app:input_hint="@string/passwd_hint"
         app:input_icon="@mipmap/passwd"
         app:is_passwd="true" />

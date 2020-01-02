@@ -1,13 +1,22 @@
 <resources>
     <string name="app_name">KeepIt</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="login">Sign in</string>
     <string name="register">Sign up</string>
-    <string name="username_hint">user name</string>
-    <string name="passwd_hint">password</string>
+    <string name="username_hint">User name</string>
+    <string name="passwd_hint">Password</string>
     <string name="register_name_hint">Please enter the username</string>
     <string name="register_passwd_hint">Please enter the password</string>
     <string name="register_confirm_passwd_hint">Please confirm the password</string>
+    <string name="logout">Log out</string>
+    <string name="profile">Personal info</string>
+    <string name="profile_user">User name：</string>
+    <string name="profile_passwd_change">Change the password</string>
+    <string name="passwd_change">Change password</string>
+    <string name="changepwd_pwdo_hint">Please enter the old password</string>
+    <string name="changepwd_pwdn_hint">Please enter the new password</string>
+    <string name="changepwd_pwdc_hint">Please confirm the password</string>
+    <string name="title_home"> JUST KEEP IT</string>
+    <string name="title_dashboard">dashboard</string>
+    <string name="title_notifications"> Notifications</string>
+
 </resources>

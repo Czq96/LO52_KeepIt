@@ -1,4 +1,4 @@
-package com.utbm.keepit;
+package com.utbm.keepit.activities;
 
 import android.app.Application;
 import android.content.Context;

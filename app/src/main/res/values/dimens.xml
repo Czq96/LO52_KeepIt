@@ -7,5 +7,8 @@
     <dimen name="radius">5dp</dimen>
     <dimen name="inputInfoSize">14sp</dimen>
     <dimen name="iconSize">35dp</dimen>
+    <dimen name="navBarTitleSize">22sp</dimen>
+    <dimen name="navBarHeight">56dp</dimen>
+    <dimen name="titleSize">18sp</dimen>
 </resources>
 

@@ -2,7 +2,7 @@ package com.utbm.keepit.backend.service;
 
 import android.util.Log;
 
-import com.utbm.keepit.MyApp;
+import com.utbm.keepit.activities.MyApp;
 import com.utbm.keepit.backend.dao.DaoSession;
 import com.utbm.keepit.backend.dao.UserDao;
 import com.utbm.keepit.backend.entity.User;

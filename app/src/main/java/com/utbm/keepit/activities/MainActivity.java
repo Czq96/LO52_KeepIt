@@ -1,21 +1,16 @@
-package com.utbm.keepit;
+package com.utbm.keepit.activities;
 
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.utbm.keepit.backend.dao.DaoSession;
+import com.utbm.keepit.R;
 import com.utbm.keepit.backend.dao.UserDao;
-import com.utbm.keepit.backend.entity.User;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import com.utbm.keepit.MyApp;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
