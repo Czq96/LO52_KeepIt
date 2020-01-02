@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -35,17 +36,17 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        DaoSession daoSession = ((MyApp) getApplication()).getDaoSession();
-        userDao = daoSession.getUserDao();
+//        DaoSession daoSession = ((MyApp) getApplication()).getDaoSession();
+//        userDao = daoSession.getUserDao();
 
 //        System.out.println("添加测试user admin admin");
 //        User testu = new User("adminxxx","adminxxx");
 //        userDao.insert(testu);
 //        System.out.println("插入完毕");
-        List<User> lu = userDao.loadAll();
-        for(User u : lu){
-            System.out.println(u.toString());
-        }
+//        List<User> lu = userDao.loadAll();
+//        for(User u : lu){
+//            System.out.println(u.toString());
+//        }
         System.out.println("----------------------------------------------------------------");
 
 

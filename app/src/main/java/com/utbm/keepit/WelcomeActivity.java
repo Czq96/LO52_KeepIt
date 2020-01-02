@@ -42,7 +42,7 @@ public class WelcomeActivity extends Activity {
      * 跳转到login
      */
     private void toLogin(){
-        Intent intent=new Intent(this,MainActivity.class);
+        Intent intent=new Intent(this,LoginActivity.class);
         startActivity(intent);
         finish();
     }

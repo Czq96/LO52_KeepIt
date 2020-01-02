@@ -1,6 +1,7 @@
 package com.utbm.keepit;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.utbm.keepit.backend.dao.DaoMaster;
 
@@ -9,12 +10,13 @@ import com.utbm.keepit.backend.dao.DaoSession;
 import org.greenrobot.greendao.database.Database;
 
 public class MyApp extends Application {
-    private DaoSession daoSession;
+    private static DaoSession daoSession;
+    private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        context = getApplicationContext();
         // regular SQLite database
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "KeepIt");
         Database db = helper.getWritableDb();
@@ -22,8 +24,12 @@ public class MyApp extends Application {
         daoSession = new DaoMaster(db).newSession();
     }
 
-    public DaoSession getDaoSession() {
+    public static DaoSession getDaoSession() {
         return daoSession;
+    }
+
+    public static Context getContext() {
+        return context;
     }
 
     private void initData(Database db){
