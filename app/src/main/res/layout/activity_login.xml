@@ -14,7 +14,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/marginSize"
         />
-    <com.utbm.KeepIt.views.InputView
+    <com.utbm.keepit.ui.views.InputView
         android:layout_width="match_parent"
         android:id="@+id/activity_login_username_input"
         android:layout_height="@dimen/inputViewHeight"
@@ -26,7 +26,7 @@
     <View
         style="@style/line"/>
 
-    <com.utbm.KeepIt.views.InputView
+    <com.utbm.keepit.ui.views.InputView
         android:id="@+id/activity_login_pwd_input"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputViewHeight"

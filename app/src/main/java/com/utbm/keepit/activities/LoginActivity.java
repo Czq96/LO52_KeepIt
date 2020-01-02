@@ -11,6 +11,8 @@ import com.utbm.keepit.R;
 import com.utbm.keepit.backend.service.UserService;
 import com.utbm.keepit.ui.views.InputView;
 
+import static com.utbm.keepit.activities.MyApp.getContext;
+
 
 public class LoginActivity extends AppCompatActivity {
 
