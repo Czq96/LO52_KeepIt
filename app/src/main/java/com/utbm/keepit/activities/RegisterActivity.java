@@ -2,6 +2,7 @@ package com.utbm.keepit.activities;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.utbm.keepit.R;
 import com.utbm.keepit.backend.entity.User;
@@ -33,14 +34,23 @@ public class RegisterActivity extends BaseActivity {
         String pwd = inputPwd.getInputStr();
         String pwdConfirm = inputPwdConfirm.getInputStr();
         if(pwd!=pwdConfirm){
-            return;
+            if(userService.findUserByName(name)!=null){
+                Toast.makeText(RegisterActivity.this, "user existed", Toast.LENGTH_SHORT).show();
+                return ;
+            }
+            else{
+                try{
+                    userService.createUser(new User(name, pwd));
+                    Toast.makeText(RegisterActivity.this, "user create success", Toast.LENGTH_SHORT).show();
+                }catch (Exception e){
+                    Toast.makeText(RegisterActivity.this, "Create failed", Toast.LENGTH_SHORT).show();
+                    return ;
+                }
+            }
         }
-        User user = new User();
-        user.setName(name);
-        user.setPwd(pwd);
-        boolean isRegistered = userService.createUser(user);
-        if (!isRegistered) {
-            return;
+        else{
+            Toast.makeText(RegisterActivity.this, "different password", Toast.LENGTH_SHORT).show();
+            return ;
         }
         onBackPressed();
     }

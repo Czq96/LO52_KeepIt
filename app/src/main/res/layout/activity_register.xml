@@ -14,7 +14,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/marginSize"
         />
-    <com.utbm.keepit.views.InputView
+    <com.utbm.keepit.ui.views.InputView
         android:layout_width="match_parent"
         android:id="@+id/input_name"
         android:layout_height="@dimen/inputViewHeight"
@@ -25,7 +25,7 @@
         />
     <View
         style="@style/line"/>
-    <com.utbm.keepit.views.InputView
+    <com.utbm.keepit.ui.views.InputView
         android:id="@+id/input_passwd"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputViewHeight"
@@ -35,7 +35,7 @@
         />
     <View
         style="@style/line"/>
-    <com.utbm.keepit.views.InputView
+    <com.utbm.keepit.ui.views.InputView
         android:id="@+id/input_confirm_passwd"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputViewHeight"
