@@ -33,7 +33,7 @@ public class RegisterActivity extends BaseActivity {
         String name = inputName.getInputStr();
         String pwd = inputPwd.getInputStr();
         String pwdConfirm = inputPwdConfirm.getInputStr();
-        if(pwd!=pwdConfirm){
+        if(pwd==pwdConfirm){
             if(userService.findUserByName(name)!=null){
                 Toast.makeText(RegisterActivity.this, "user existed", Toast.LENGTH_SHORT).show();
                 return ;
