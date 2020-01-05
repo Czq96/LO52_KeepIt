@@ -55,6 +55,9 @@ public class TopicDao extends AbstractDao<Topic, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"TOPIC_NAME\" TEXT UNIQUE ," + // 1: topicName
                 "\"IMAGE_PATH\" TEXT);"); // 2: imagePath
+        // Add Indexes
+        db.execSQL("CREATE UNIQUE INDEX " + constraint + "IDX_TOPIC__id_TOPIC_NAME ON \"TOPIC\"" +
+                " (\"_id\" ASC,\"TOPIC_NAME\" ASC);");
     }
 
     /** Drops the underlying database table. */

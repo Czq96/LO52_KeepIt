@@ -14,7 +14,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/marginSize"
         />
-    <com.helloworld.views.InputView
+    <com.utbm.keepit.ui.views.InputView
         android:layout_width="match_parent"
         android:id="@+id/input_pwdo"
         android:layout_height="@dimen/navBarHeight"
@@ -25,7 +25,7 @@
         />
     <View
         style="@style/line"/>
-    <com.helloworld.views.InputView
+    <com.utbm.keepit.ui.views.InputView
         android:id="@+id/input_pwdn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/navBarHeight"

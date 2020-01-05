@@ -2,6 +2,7 @@ package com.utbm.keepit.backend.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Index;
 import org.greenrobot.greendao.annotation.JoinEntity;
 import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.Unique;
@@ -12,7 +13,9 @@ import org.greenrobot.greendao.DaoException;
 import com.utbm.keepit.backend.dao.DaoSession;
 import com.utbm.keepit.backend.dao.TopicDao;
 
-@Entity
+@Entity(indexes = {
+        @Index(value = "id, topicName", unique = true)
+})
 public class Topic {
 
     @Id(autoincrement = true)
