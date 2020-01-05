@@ -55,7 +55,7 @@ public class InputView extends FrameLayout {
             return;
         }
         TypedArray typedArray=context.obtainStyledAttributes(attributeSet, R.styleable.inputView);
-        inputIcon=typedArray.getResourceId(R.styleable.inputView_input_icon,R.mipmap.keep);
+//        inputIcon=typedArray.getResourceId(R.styleable.inputView_input_icon,R.mipmap.keep);
         inputHint=typedArray.getString(R.styleable.inputView_input_hint);
         isPasswd=typedArray.getBoolean(R.styleable.inputView_is_passwd,false);
         typedArray.recycle();

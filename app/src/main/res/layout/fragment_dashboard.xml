@@ -1,19 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_dashboard"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+
+    <com.utbm.keepit.ui.views.InputView
+        android:id="@+id/sceance_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="@dimen/inputViewHeight"
+
+        app:input_hint="@string/sceance_nom"
+        app:is_passwd="false"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="47dp" />
+
+    <View
+        style="@style/line"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/sceance_name" />
+
+    <com.utbm.keepit.ui.views.InputView
+        android:id="@+id/sceance_duree"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/inputViewHeight"
+
+        app:input_hint="@string/sceance_duree"
+        app:is_passwd="false"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="47dp" />
+    <View
+        style="@style/line"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/sceance_duree" />
+    <com.utbm.keepit.ui.views.InputView
+        android:id="@+id/sceance_intensite"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/inputViewHeight"
+
+        app:input_hint="@string/sceance_intensite"
+        app:is_passwd="false"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="47dp" />
+    <View
+        style="@style/line"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/sceance_intensite" />
+    <com.utbm.keepit.ui.views.InputView
+        android:id="@+id/sceance_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/inputViewHeight"
+
+        app:input_hint="@string/sceance_nombre"
+        app:is_passwd="false"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="47dp" />
+    <View
+        style="@style/line"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/sceance_nombre" />
+    <com.utbm.keepit.ui.views.InputView
+        android:id="@+id/sceance_description"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+
+        app:input_hint="@string/sceance_description"
+        app:is_passwd="false"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="47dp" />
+    <View
+        style="@style/line"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/sceance_description" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Valider"></Button>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Annuler"
+        android:layout_marginBottom="50dp"></Button>
+
+</LinearLayout></ScrollView>
