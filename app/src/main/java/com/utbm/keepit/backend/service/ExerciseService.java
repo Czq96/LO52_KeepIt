@@ -1,18 +1,14 @@
 package com.utbm.keepit.backend.service;
 
+import android.database.Cursor;
 import android.util.Log;
 
 import com.utbm.keepit.MyApp;
 import com.utbm.keepit.backend.dao.DaoSession;
 import com.utbm.keepit.backend.dao.ExerciseDao;
-import com.utbm.keepit.backend.dao.JoinTopicExerciseDao;
-import com.utbm.keepit.backend.dao.TopicDao;
 import com.utbm.keepit.backend.entity.Exercise;
-import com.utbm.keepit.backend.entity.JoinTopicExercise;
-import com.utbm.keepit.backend.entity.Topic;
 
-import org.greenrobot.greendao.query.QueryBuilder;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
@@ -52,12 +48,47 @@ public class ExerciseService {
     }
 
     public List<Exercise> findByTopicId(long topicId){
-        QueryBuilder<Exercise> qb = exerciseDao.queryBuilder();
-        qb.join(JoinTopicExercise.class, JoinTopicExerciseDao.Properties.ExerciseId);
-        qb.join(Topic.class, TopicDao.Properties.Id).where(TopicDao.Properties.Id.eq(topicId));
-        qb.distinct();
-        return qb.list();
+        //TODO: 似乎有点小问题  待测试
+    /*QueryBuilder<Exercise> qb = exerciseDao.queryBuilder();
+    Query query = exerciseDao.queryRawCreate(
+            ", GROUP G WHERE G.NAME=? AND T.GROUP_ID=G._ID", "admin";
+    qb.join(JoinTopicExercise.class, JoinTopicExerciseDao.Properties.ExerciseId);
+    qb.join(Topic.class, TopicDao.Properties.Id).where(TopicDao.Properties.Id.eq(topicId));
+    qb.distinct();
+    String strSql = "";
+    qb
+    return qb.queryRaw(Exercise.class, sql, strSql);
+    return qb.list();*/
+        try
+        {
+            DaoSession session= MyApp.getDaoSession();
+            long fromId=-1;
+            String strSql="select * from EXERCISE e inner join JOIN_TOPIC_EXERCISE te on e._id = te.EXERCISE_ID" +
+                    " inner join TOPIC t on te.TOPIC_ID =t._id" +
+                    " where t._id = " + topicId ;
+            Cursor c  = session.getDatabase().rawQuery(strSql,null);
+            ArrayList<Exercise> list = new ArrayList<Exercise>();
+            if(c.moveToFirst())
+            {
+                Exercise exercise= new Exercise();
+                exercise.setId(c.getLong(c.getColumnIndex("_id")));
+                exercise.setDescription(c.getString(c.getColumnIndex("DESCRIPTION")));
+                exercise.setName(c.getString(c.getColumnIndex("NAME")));
+                exercise.setLevelDifficult(c.getInt(c.getColumnIndex("LEVEL_DIFFICULT")));
+                exercise.setTypePublic(c.getInt(c.getColumnIndex("TYPE_PUBLIC")));
+                exercise.setLevelGroup(c.getInt(c.getColumnIndex("LEVEL_GROUP")));
+                exercise.setImageResource(c.getString(c.getColumnIndex("IMAGE_RESOURCE")));
+                list.add(exercise);
+            }
+            c.close();
+            return list;
+        }
+        catch (Exception ex)
+        {
+            ex.getMessage();
 
+        }
+        return null;
     }
 
     //TODO: join class 的删除？

@@ -32,6 +32,10 @@ public class MyApp extends Application {
         return context;
     }
 
+    private void cleanDB(Database db){
+        //TODO
+    }
+
     private void initData(Database db){
         // init data in database
         //数据库中的数据名字和class中的属性名字不同   需要看 DAO中的 property

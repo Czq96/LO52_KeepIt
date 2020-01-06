@@ -46,6 +46,11 @@ public Topic(Long id, String topicName, String imagePath) {
     this.imagePath = imagePath;
 }
 
+    public Topic(String topicName, String imagePath) {
+        this.topicName = topicName;
+        this.imagePath = imagePath;
+    }
+
 @Generated(hash = 849012203)
 public Topic() {
 }
