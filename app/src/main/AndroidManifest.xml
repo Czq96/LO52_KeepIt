@@ -25,9 +25,22 @@
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.BaseActivity" />
-        <activity android:name=".activities.ChangePwdActivity" />
-        <activity android:name=".activities.ProfileActivity" />
-        <activity android:name=".activities.RegisterActivity" />
-    </application>
+        <activity android:name=".activities.ChangePwdActivity"/>
+        <activity android:name=".activities.ProfileActivity"/>
+        <activity android:name=".activities.RegisterActivity"/>
+        <activity android:name=".activities.CreateTopicActivity"/>
 
+        <provider
+            android:authorities="com.utbm.keepit.activities.CreateTopicActivity"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths">
+            </meta-data>
+        </provider>
+
+    </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 </manifest>

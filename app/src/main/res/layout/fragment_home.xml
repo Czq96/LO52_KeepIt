@@ -19,6 +19,7 @@
 </androidx.recyclerview.widget.RecyclerView>
     <Button
         style="@style/commitBtn"
+        android:id="@+id/btn_create_topic"
         android:text="@string/create_topic"
         android:layout_marginTop="@dimen/marginSize"
         android:onClick="onCreateTopicClick"

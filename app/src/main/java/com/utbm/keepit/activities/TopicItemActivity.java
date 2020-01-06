@@ -13,6 +13,8 @@ import com.utbm.keepit.ui.TopicListAdapter;
 import java.util.List;
 
 public class TopicItemActivity extends AppCompatActivity {
+
+public class TopicItemActivity extends AppCompatActivity {
     private RecyclerView rvTopicItem;
     private TopicItemAdapter topicItemAdapter;
     @Override
