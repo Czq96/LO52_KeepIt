@@ -25,4 +25,5 @@
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/btn_commit_select</item>
     </style>
+
 </resources>

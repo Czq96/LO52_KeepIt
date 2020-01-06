@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.utbm.keepit.MyApp;
 import com.utbm.keepit.R;
+import com.utbm.keepit.backend.entity.Exercise;
 import com.utbm.keepit.backend.entity.Topic;
 import com.utbm.keepit.backend.service.TopicService;
 import com.utbm.keepit.ui.TopicAdapter;
@@ -52,6 +53,11 @@ public class HomeFragment extends Fragment {
 
         for(Topic t : listTopicData){
             System.out.println(t.toString());
+            System.out.println(t.getListExercises().size());
+            for(Exercise e : t.getListExercises()){
+                System.out.println("Exercise: ");
+                System.out.println(e.toString());
+            }
         }
 
 

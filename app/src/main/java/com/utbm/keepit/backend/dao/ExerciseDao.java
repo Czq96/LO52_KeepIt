@@ -13,6 +13,7 @@ import org.greenrobot.greendao.query.Query;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import com.utbm.keepit.backend.entity.JoinSeanceExercise;
+import com.utbm.keepit.backend.entity.JoinTopicExercise;
 
 import com.utbm.keepit.backend.entity.Exercise;
 
@@ -41,6 +42,7 @@ public class ExerciseDao extends AbstractDao<Exercise, Long> {
     private DaoSession daoSession;
 
     private Query<Exercise> seance_ListExercisesQuery;
+    private Query<Exercise> topic_ListExercisesQuery;
 
     public ExerciseDao(DaoConfig config) {
         super(config);
@@ -199,6 +201,21 @@ public class ExerciseDao extends AbstractDao<Exercise, Long> {
         }
         Query<Exercise> query = seance_ListExercisesQuery.forCurrentThread();
         query.setParameter(0, seanceId);
+        return query.list();
+    }
+
+    /** Internal query to resolve the "listExercises" to-many relationship of Topic. */
+    public List<Exercise> _queryTopic_ListExercises(Long topicId) {
+        synchronized (this) {
+            if (topic_ListExercisesQuery == null) {
+                QueryBuilder<Exercise> queryBuilder = queryBuilder();
+                queryBuilder.join(JoinTopicExercise.class, JoinTopicExerciseDao.Properties.ExerciseId)
+                    .where(JoinTopicExerciseDao.Properties.TopicId.eq(topicId));
+                topic_ListExercisesQuery = queryBuilder.build();
+            }
+        }
+        Query<Exercise> query = topic_ListExercisesQuery.forCurrentThread();
+        query.setParameter(0, topicId);
         return query.list();
     }
 

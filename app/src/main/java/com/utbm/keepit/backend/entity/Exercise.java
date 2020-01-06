@@ -64,6 +64,14 @@ public Exercise(Long id, String name, int typePublic, int levelDifficult,
 public Exercise() {
 }
 
+    @Override
+    public String toString(){
+        return "id: "+ this.id + "name: "+this.name
+                + "description  " + this.description;
+    }
+
+
+
 public Long getId() {
     return this.id;
 }

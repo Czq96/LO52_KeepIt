@@ -37,7 +37,6 @@ public class TopicDao extends AbstractDao<Topic, Long> {
     private DaoSession daoSession;
 
     private Query<Topic> exercise_ListTopicQuery;
-    private Query<Topic> topic_ListExercisesQuery;
 
     public TopicDao(DaoConfig config) {
         super(config);
@@ -171,21 +170,6 @@ public class TopicDao extends AbstractDao<Topic, Long> {
         }
         Query<Topic> query = exercise_ListTopicQuery.forCurrentThread();
         query.setParameter(0, exerciseId);
-        return query.list();
-    }
-
-    /** Internal query to resolve the "listExercises" to-many relationship of Topic. */
-    public List<Topic> _queryTopic_ListExercises(Long topicId) {
-        synchronized (this) {
-            if (topic_ListExercisesQuery == null) {
-                QueryBuilder<Topic> queryBuilder = queryBuilder();
-                queryBuilder.join(JoinTopicExercise.class, JoinTopicExerciseDao.Properties.ExerciseId)
-                    .where(JoinTopicExerciseDao.Properties.TopicId.eq(topicId));
-                topic_ListExercisesQuery = queryBuilder.build();
-            }
-        }
-        Query<Topic> query = topic_ListExercisesQuery.forCurrentThread();
-        query.setParameter(0, topicId);
         return query.list();
     }
 

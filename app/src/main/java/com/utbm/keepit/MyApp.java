@@ -20,7 +20,7 @@ public class MyApp extends Application {
         // regular SQLite database
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "KeepIt");
         Database db = helper.getWritableDb();
-        this.initData(db); //执行过一次了，不需要再次执行
+//        this.initData(db); //执行过一次了，不需要再次执行
         daoSession = new DaoMaster(db).newSession();
     }
 

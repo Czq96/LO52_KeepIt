@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+
+    <ImageView
+        android:id="@+id/exercise_image"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:src="@mipmap/muscle">
+    </ImageView>
+    <TextView
+        android:id="@+id/exercise_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:textSize="30sp"
+        android:layout_toRightOf="@id/exercise_image"/>
+
+    <TextView
+        android:id="@+id/exercise_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/exercise_image"
+        android:layout_toEndOf="@id/exercise_name"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+        android:textSize="20sp"/>
+
+</LinearLayout>
