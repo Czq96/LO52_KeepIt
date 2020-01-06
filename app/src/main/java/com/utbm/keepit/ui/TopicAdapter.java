@@ -87,6 +87,8 @@ public class TopicAdapter extends BaseAdapter {
 //        }
 
         listExerciseView = convertView.findViewById(R.id.exercise_list);
+        //TODO: service getExercise By Topic id   由于greenDao 似乎没有lazy loading 需要自己写sql
+        //TODO: 界面太丑
         adapter = new ExerciseAdapter( exerciseService.findAll(),getContext());
         listExerciseView.setAdapter(adapter);
 

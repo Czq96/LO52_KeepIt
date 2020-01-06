@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChangePwdActivity">
+    tools:context=".activities.ChangePwdActivity">
     <include layout="@layout/nav_bar"/>
     <ImageView
         android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
         />
     <View
         style="@style/line"/>
-    <com.helloworld.views.InputView
+    <com.utbm.keepit.ui.views.InputView
         android:id="@+id/input_pwdc"
         android:layout_width="match_parent"
         android:layout_height="@dimen/navBarHeight"

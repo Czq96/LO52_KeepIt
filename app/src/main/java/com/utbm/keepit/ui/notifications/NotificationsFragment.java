@@ -1,10 +1,13 @@
 package com.utbm.keepit.ui.notifications;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -12,24 +15,69 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+
 import com.utbm.keepit.R;
+import com.utbm.keepit.activities.ChangePwdActivity;
+import com.utbm.keepit.activities.LoginActivity;
 
 public class NotificationsFragment extends Fragment {
 
     private NotificationsViewModel notificationsViewModel;
+    private TextView userName;
+    private Button logoutBtn;
+    private TextView changePwd ;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
                 ViewModelProviders.of(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        userName = root.findViewById(R.id.userName);
+
+        userName.setText("admin");
+
+
         return root;
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        logoutBtn = (Button) getActivity().findViewById(R.id.btn_logout);
+        changePwd = (TextView) getActivity().findViewById(R.id.change_pwd);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
+        changePwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getActivity(), ChangePwdActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+    }
+
+    //onLogoutClick  onChangePwdClick
+//    public void onChangePwdClick(View view) {
+//        Intent intent= new Intent(this.getActivity(), ChangePwdActivity.class);
+//        startActivity(intent);
+//        this.getActivity().finish();
+//    }
+//
+//    public void onLogoutClick(View view){
+////        UserUtils.logout(this);
+//        Intent intent= new Intent(this.getActivity(), LoginActivity.class);
+//        startActivity(intent);
+//        this.getActivity().finish();
+//
+
 }

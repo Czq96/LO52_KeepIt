@@ -23,4 +23,5 @@
     <string name="sceance_intensite"> Intensité : </string>
     <string name="sceance_nombre"> Nombre de répétition : </string>
     <string name="sceance_description"> Description : </string>
+    <string name="create_topic">Créer Topic</string>
 </resources>

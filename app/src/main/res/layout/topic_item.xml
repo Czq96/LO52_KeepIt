@@ -9,7 +9,7 @@
         android:layout_height="30sp"
         android:src="@mipmap/dos">
     </ImageView>>
-    <TextView
+    <TextView   
         android:id="@+id/topic_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +29,6 @@
 
     <com.utbm.keepit.ui.views.MyListView
         android:id="@+id/exercise_list"
-        android:layout_toRightOf="@id/topic_name"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content">
     </com.utbm.keepit.ui.views.MyListView>

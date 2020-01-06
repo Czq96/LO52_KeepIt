@@ -1,5 +1,6 @@
 package com.utbm.keepit.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -18,6 +20,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.utbm.keepit.MyApp;
 import com.utbm.keepit.R;
+import com.utbm.keepit.activities.LoginActivity;
+import com.utbm.keepit.activities.MainActivity;
 import com.utbm.keepit.backend.entity.Exercise;
 import com.utbm.keepit.backend.entity.Topic;
 import com.utbm.keepit.backend.service.TopicService;
@@ -71,7 +75,14 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    public void onCommitClick(View view){
+                    Intent intent=new Intent(this.getActivity(), MainActivity.class);
+                    startActivity(intent);
+        this.getActivity().finish();
+
+    }
 
 
-    
+
+
 }
