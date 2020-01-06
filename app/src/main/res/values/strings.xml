@@ -17,11 +17,12 @@
     <string name="changepwd_pwdc_hint">Please confirm the password</string>
     <string name="title_home"> JUST KEEP IT</string>
     <string name="title_dashboard">Créer un scéance</string>
-    <string name="title_notifications"> Notifications</string>
+    <string name="title_notifications"> Profile</string>
     <string name="sceance_nom"> Nom : </string>
     <string name="sceance_duree"> Duree : </string>
     <string name="sceance_intensite"> Intensité : </string>
     <string name="sceance_nombre"> Nombre de répétition : </string>
     <string name="sceance_description"> Description : </string>
     <string name="create_topic">Créer Topic</string>
+    <string name="in_topic_name">Nom du Topic</string>
 </resources>

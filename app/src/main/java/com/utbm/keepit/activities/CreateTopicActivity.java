@@ -19,14 +19,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.utbm.keepit.R;
+import com.utbm.keepit.backend.entity.Topic;
 import com.utbm.keepit.backend.service.TopicService;
 import com.utbm.keepit.ui.views.InputView;
+import com.utbm.keepit.utils.GetPathFromUri;
 
 import android.content.Intent;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -35,7 +39,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-
+import java.util.UUID;
+//TODO: 从相册选择有问题
 import static com.utbm.keepit.R.layout.fragment_home;
 
 public class CreateTopicActivity extends Activity {
@@ -65,6 +70,8 @@ public class CreateTopicActivity extends Activity {
         take_photo = (Button) findViewById(R.id.take_photo);
         select_photo = (Button) findViewById(R.id.select_photo);
         imageview = (ImageView) findViewById(R.id.image_selected);
+        topicName = (InputView) findViewById(R.id.in_topic_name);
+        createTopic = (Button) findViewById(R.id.create_topic);
 
         take_photo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +88,35 @@ public class CreateTopicActivity extends Activity {
                 select_photo();
             }
         });
+
+        createTopic.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                //从相册中选取图片
+                insertTopic();
+            }
+        });
+
+    }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void insertTopic(){
+
+        String topicName = this.topicName.getInputStr();
+        if(topicName == null || imageUri==null){
+            Toast.makeText(CreateTopicActivity.this, "Please select image and name of topic", Toast.LENGTH_SHORT).show();
+        }else{
+           // String imagePath = GetPathFromUri.getPath(CreateTopicActivity.this,imageUri);
+            Topic t = new Topic(topicName,imageUri.toString());
+            if(topicService.createTopic(t))
+            {
+                Toast.makeText(CreateTopicActivity.this, "insert success ", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(this,MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            //TODO: 创建失败的后果
+        }
     }
     /**
      *拍照获取图片
@@ -89,7 +125,8 @@ public class CreateTopicActivity extends Activity {
         String status= Environment.getExternalStorageState();
         if(status.equals(Environment.MEDIA_MOUNTED)) {
             //创建File对象，用于存储拍照后的图片
-            File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
+            String imageFileName = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+            File outputImage = new File(getExternalCacheDir(), imageFileName+".jpg");
             try {
                 if (outputImage.exists()) {
                     outputImage.delete();

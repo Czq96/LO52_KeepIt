@@ -1,6 +1,9 @@
 package com.utbm.keepit.ui;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,10 +79,18 @@ public class TopicAdapter extends BaseAdapter {
 //        ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_item_icon);
         TextView id = (TextView) convertView.findViewById(R.id.topic_id);
         TextView name = (TextView) convertView.findViewById(R.id.topic_name);
+        ImageView topicImage = (ImageView) convertView.findViewById(R.id.topic_image);
         //4. 给视图设置数据
 //        imageView.setImageDrawable(appInfo.getIcon());
         id.setText(topic.getId().toString());
         name.setText(topic.getTopicName());
+        if(topic.getImagePath()!= null){
+            //  Uri imageUri = Uri.parse((String) str);
+            topicImage.setImageURI( Uri.parse( topic.getImagePath()));
+        }else{
+            topicImage.setImageResource(R.mipmap.dos);
+//            android:src="@mipmap/dos"
+        }
         //5. 设置exercise list
 
 //        for(Exercise e : exerciseService.findAll()){
@@ -87,9 +98,8 @@ public class TopicAdapter extends BaseAdapter {
 //        }
 
         listExerciseView = convertView.findViewById(R.id.exercise_list);
-        //TODO: service getExercise By Topic id   由于greenDao 似乎没有lazy loading 需要自己写sql
-        //TODO: 界面太丑
-        adapter = new ExerciseAdapter( exerciseService.findAll(),getContext());
+
+        adapter = new ExerciseAdapter( exerciseService.findByTopicId(topic.getId()),getContext());
         listExerciseView.setAdapter(adapter);
 
 
