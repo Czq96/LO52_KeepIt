@@ -54,6 +54,7 @@ public class CreateTopicActivity extends Activity {
     public static final int SELECT_PHOTO = 2;
     private ImageView imageview;
     private Uri imageUri;
+    private ImageView ret;
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //
@@ -72,7 +73,20 @@ public class CreateTopicActivity extends Activity {
         imageview = (ImageView) findViewById(R.id.image_selected);
         topicName = (InputView) findViewById(R.id.in_topic_name);
         createTopic = (Button) findViewById(R.id.create_topic);
+        ret=(ImageView) findViewById(R.id.navBack);
+        ret.setVisibility(true?View.VISIBLE:View.GONE);
+        ret.setClickable(true);
+        ret.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                System.out.println("添加测试user admin admin");
+                Intent intent = new Intent(CreateTopicActivity.this,MainActivity.class);
+
+                startActivity(intent);
+
+            }
+        });
         take_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +113,7 @@ public class CreateTopicActivity extends Activity {
         });
 
     }
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void insertTopic(){
 
@@ -205,6 +220,7 @@ public class CreateTopicActivity extends Activity {
      * */
     private void handleImageBeforeKitKat(Intent data) {
         Uri uri = data.getData();
+        imageUri=uri;
         String imagePath = getImagePath(uri,null);
         displayImage(imagePath);
     }
@@ -215,6 +231,7 @@ public class CreateTopicActivity extends Activity {
     private void handleImgeOnKitKat(Intent data) {
         String imagePath = null;
         Uri uri = data.getData();
+        imageUri=uri;
         if (DocumentsContract.isDocumentUri(this,uri)) {
             //如果是document类型的uri，则通过document id处理
             String docId = DocumentsContract.getDocumentId(uri);
