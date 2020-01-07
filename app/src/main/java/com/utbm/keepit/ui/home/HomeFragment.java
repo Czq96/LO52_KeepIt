@@ -13,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.utbm.keepit.R;
@@ -40,7 +42,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                          ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
 
 //        homeViewModel =
 //                ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -65,9 +67,15 @@ public class HomeFragment extends Fragment {
     //    listTopicView.setAdapter(adapter);
 
         List<Topic> listTopicData = topicService.findAll();
+//        for(Topic t: listTopicData){
+//            System.out.println(t.toString());
+//        }
+
+
         rvTopic=root.findViewById(R.id.rv_topic);
 //        rvTopic.addItemDecoration(new GridSpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.marginItemSize),rvGrid));
         rvTopic.setNestedScrollingEnabled(false);
+        rvTopic.setLayoutManager(new GridLayoutManager(this.getContext(),3));
         topicListAdapter=new TopicListAdapter(this.getContext(),listTopicData);
         rvTopic.setAdapter(topicListAdapter);
         return root;

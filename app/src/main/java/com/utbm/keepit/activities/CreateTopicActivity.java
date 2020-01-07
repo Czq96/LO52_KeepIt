@@ -114,6 +114,8 @@ public class CreateTopicActivity extends Activity {
                 Intent intent=new Intent(this,MainActivity.class);
                 startActivity(intent);
                 finish();
+            }else{
+                Toast.makeText(CreateTopicActivity.this, "name existed", Toast.LENGTH_SHORT).show();
             }
             //TODO: 创建失败的后果
         }

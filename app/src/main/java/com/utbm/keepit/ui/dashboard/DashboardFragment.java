@@ -111,27 +111,27 @@ public class DashboardFragment extends Fragment {
         addExercise = (Button) getActivity().findViewById(R.id.add_one_exercise);
         createSeance = (Button) getActivity().findViewById(R.id.btn_create_seance);
         annuler = (Button) getActivity().findViewById(R.id.btn_cancle_create_seance);
-        addExercise.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-//                Intent intent= new Intent(getActivity(), LoginActivity.class);
-//                startActivity(intent);
-//                getActivity().finish();
-                CharSequence[] items=["1","2","3"];
-                AlertDialog dialog = new AlertDialog.Builder(getActivity().setTitle("单选对话框")
-                        .setSingleChoiceItems(items, -1, new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getActivity(), items[which], Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            }
-                        }).create();
-                dialog.show();
-//                tempExercises.add(e);
-            }
-        });
+//        addExercise.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+////                Intent intent= new Intent(getActivity(), LoginActivity.class);
+////                startActivity(intent);
+////                getActivity().finish();
+//                CharSequence[] items=["1","2","3"];
+//                AlertDialog dialog = new AlertDialog.Builder(getActivity().setTitle("单选对话框")
+//                        .setSingleChoiceItems(items, -1, new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Toast.makeText(getActivity(), items[which], Toast.LENGTH_SHORT).show();
+//                                dialog.dismiss();
+//                            }
+//                        }).create();
+//                dialog.show();
+////                tempExercises.add(e);
+//            }
+//        });
 
         createSeance.setOnClickListener(new View.OnClickListener() {
             @Override
