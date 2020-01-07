@@ -74,8 +74,8 @@ public class HomeFragment extends Fragment {
 
         rvTopic=root.findViewById(R.id.rv_topic);
 //        rvTopic.addItemDecoration(new GridSpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.marginItemSize),rvGrid));
-        rvTopic.setNestedScrollingEnabled(false);
-        rvTopic.setLayoutManager(new GridLayoutManager(this.getContext(),3));
+//        rvTopic.setNestedScrollingEnabled(false);
+        rvTopic.setLayoutManager(new GridLayoutManager(this.getContext(),2));
         topicListAdapter=new TopicListAdapter(this.getContext(),listTopicData);
         rvTopic.setAdapter(topicListAdapter);
         return root;
