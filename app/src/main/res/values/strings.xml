@@ -25,4 +25,7 @@
     <string name="sceance_description"> Description : </string>
     <string name="create_topic">Créer Topic</string>
     <string name="in_topic_name">Nom du Topic</string>
+    <string name="create_exercise">Créer Exercise</string>
+    <string name="in_exercise_name">Nom exercise</string>
+    <string name="in_exercise_description">Description exercise</string>
 </resources>

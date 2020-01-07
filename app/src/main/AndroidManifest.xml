@@ -29,6 +29,7 @@
         <activity android:name=".activities.ProfileActivity"/>
         <activity android:name=".activities.RegisterActivity"/>
         <activity android:name=".activities.CreateTopicActivity"/>
+        <activity android:name=".activities.CreateExerciseActivity" />
 
         <provider
             android:authorities="com.utbm.keepit.activities.CreateTopicActivity"
