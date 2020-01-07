@@ -12,5 +12,7 @@
     <dimen name="navBarHeight">56dp</dimen>
     <dimen name="titleSize">18sp</dimen>
     <dimen name="marginTabSize">4dp</dimen>
+    <dimen name="marginBottom">65dp</dimen>
+    <dimen name="infoSize">14sp</dimen>
 </resources>
 

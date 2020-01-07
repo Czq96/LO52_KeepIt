@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.TopicItemActivity"></activity>
+        <activity android:name=".activities.ExerciceActivity"></activity>
         <activity
             android:name=".activities.WelcomeActivity"
             android:label="@string/app_name">

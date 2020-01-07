@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.utbm.keepit.R;
-import com.utbm.keepit.activities.TopicItemActivity;
+import com.utbm.keepit.activities.ExerciceActivity;
 import com.utbm.keepit.backend.entity.Topic;
 
 import java.util.List;
@@ -37,16 +37,10 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull TopicListAdapter.ViewHolder holder, final int position) {
-        System.out.println("onBindViewHolder onBindViewHolder onBindViewHolder onBindViewHolder ");
-        System.out.println(topics.get(position).getImagePath()+"     "+topics.get(position).getTopicName());
             if(topics.get(position).getImagePath()!= null){
                 //  Uri imageUri = Uri.parse((String) str);
-                System.out.println("no imgs in topic");
-
                 holder.imageView.setImageURI( Uri.parse( topics.get(position).getImagePath()));
             }else{
-                System.out.println("no imgs in topic");
-
                 holder.imageView.setImageResource(R.mipmap.dos);
 //            android:src="@mipmap/dos"
             }
@@ -54,7 +48,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, TopicItemActivity.class);
+                Intent intent=new Intent(context, ExerciceActivity.class);
                 intent.putExtra("topicid",topics.get(position).getId());//TODO 根据topicid获取对应的exercice
                 context.startActivity(intent);
             }

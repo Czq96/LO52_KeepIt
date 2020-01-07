@@ -25,7 +25,7 @@
         android:id="@+id/btn_create_topic"
         android:text="@string/create_topic"
         android:layout_marginTop="@dimen/marginSize"
-        android:layout_marginBottom="65dp"
+        android:layout_marginBottom="@dimen/marginBottom"
         android:onClick="onCreateTopicClick"
         tools:ignore="MissingConstraints" />
 </LinearLayout>

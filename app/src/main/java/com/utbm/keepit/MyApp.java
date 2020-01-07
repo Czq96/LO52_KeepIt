@@ -20,7 +20,7 @@ public class MyApp extends Application {
         // regular SQLite database
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "KeepIt");
         Database db = helper.getWritableDb();
-//        this.initData(db); //执行过一次了，不需要再次执行
+      // this.initData(db); //执行过一次了，不需要再次执行
         daoSession = new DaoMaster(db).newSession();
     }
 
@@ -53,11 +53,11 @@ public class MyApp extends Application {
         //    private String imageResource;
         //TYPE_PUBLIC    LEVEL_DIFFICULT    LEVEL_GROUP  DESCRIPTION  IMAGE_RESOURCE
         db.execSQL("INSERT OR REPLACE INTO Exercise(_ID, NAME, TYPE_PUBLIC, LEVEL_DIFFICULT, LEVEL_GROUP, DESCRIPTION, IMAGE_RESOURCE) " +
-                "VALUES(1,'foo',0,7,0,'descrpition 1','file url 1')");
+                "VALUES(1,'foo',0,7,0,'descrpition 1',NULL)");
         db.execSQL("INSERT OR REPLACE INTO Exercise(_ID, NAME, TYPE_PUBLIC, LEVEL_DIFFICULT, LEVEL_GROUP, DESCRIPTION, IMAGE_RESOURCE) " +
-                " VALUES(2,'bar',1,2,1,'descrpition 2','file url 2')");
+                " VALUES(2,'bar',1,2,1,'descrpition 2',NULL)");
         db.execSQL("INSERT OR REPLACE INTO Exercise(_ID, NAME, TYPE_PUBLIC, LEVEL_DIFFICULT, LEVEL_GROUP, DESCRIPTION, IMAGE_RESOURCE) " +
-                " VALUES(3,'xxxxx',2,5,2,'descrpition 3','file url 3')");
+                " VALUES(3,'xxxxx',2,5,2,'descrpition 3',NULL)");
         //插入JoinTopicExercise
 //            private Long topicId;
 //            private Long exerciseId;

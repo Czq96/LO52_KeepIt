@@ -44,33 +44,7 @@ public class HomeFragment extends Fragment {
                          ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-//        homeViewModel =
-//                ViewModelProviders.of(this).get(HomeViewModel.class);
-
-
-//        final TextView textView = root.findViewById(R.id.text_home);
-//        homeViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
-
-//        topicService = new TopicService();
- //       List<Topic> listTopicData = topicService.findAll();
-//
-  //      listTopicView = (ListView)root.findViewById(R.id.TopicList);
-//
-  //      adapter = new TopicAdapter(listTopicData, getActivity());
-
-
-    //    listTopicView.setAdapter(adapter);
-
         List<Topic> listTopicData = topicService.findAll();
-//        for(Topic t: listTopicData){
-//            System.out.println(t.toString());
-//        }
-
 
         rvTopic=root.findViewById(R.id.rv_topic);
 //        rvTopic.addItemDecoration(new GridSpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.marginItemSize),rvGrid));
