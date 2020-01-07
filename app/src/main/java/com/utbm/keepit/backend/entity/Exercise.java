@@ -66,8 +66,11 @@ public Exercise() {
 
     @Override
     public String toString(){
-        return "id: "+ this.id + "name: "+this.name
-                + "description  " + this.description;
+        return "Name: "+this.name +"\n" +
+                "Public: "+ExerciseDataToDesciption.descripPublic.get(this.getTypePublic()) +"\n"+
+                "Group: "+ExerciseDataToDesciption.descripGroup.get(this.getLevelGroup()) +"\n"+
+                "Difficulté: "+ExerciseDataToDesciption.descripDifficult.get(this.getLevelDifficult());
+
     }
 
 

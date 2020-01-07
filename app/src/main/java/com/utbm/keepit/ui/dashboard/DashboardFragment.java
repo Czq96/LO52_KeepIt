@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,11 +18,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.utbm.keepit.R;
 import com.utbm.keepit.activities.ChangePwdActivity;
 import com.utbm.keepit.activities.LoginActivity;
 import com.utbm.keepit.backend.entity.Exercise;
+import com.utbm.keepit.backend.service.ExerciseService;
 import com.utbm.keepit.ui.views.InputView;
 import com.utbm.keepit.ui.views.PickerView;
 
@@ -31,6 +34,20 @@ import java.util.List;
 public class DashboardFragment extends Fragment {
 
     private List<Exercise>  tempExercises;
+    private ExerciseService exerciseService;
+    private List<Exercise>  allExercises;
+    public List<String> items = new ArrayList<>();
+    String stringChoice;
+
+    private RecyclerView exChoosed;
+//    private  topicListAdapter;
+//    rvTopic=root.findViewById(R.id.rv_topic);
+////        rvTopic.addItemDecoration(new GridSpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.marginItemSize),rvGrid));
+//        rvTopic.setNestedScrollingEnabled(false);
+//        rvTopic.setLayoutManager(new GridLayoutManager(this.getContext(),3));
+//    topicListAdapter=new TopicListAdapter(this.getContext(),listTopicData);
+//        rvTopic.setAdapter(topicListAdapter);
+
     private Button addExercise, createSeance, annuler;
     //
 //    private Long id;
@@ -41,7 +58,44 @@ public class DashboardFragment extends Fragment {
     private InputView sceanceDuration, sceanceIntens, sceanceRep;
     private PickerView hourPick,secondPick,minutePick;
 
-//    AlertController.RecycleListView
+
+    private void showExerciseDialog() {
+        final String[] exercisesItems = new String[items.size()];
+
+        for (int i = 0; i < items.size(); i++) {
+            exercisesItems[i] = items.get(i);
+        }
+
+        AlertDialog.Builder singleChoiceDialog =
+                new AlertDialog.Builder(getActivity());
+        singleChoiceDialog.setTitle("Choisir un entraînement");
+        // 第二个参数是默认选项，此处设置为0
+        singleChoiceDialog.setSingleChoiceItems(exercisesItems, 0,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        stringChoice = exercisesItems[which];
+                    }
+                });
+        singleChoiceDialog.setPositiveButton("Confirm",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (stringChoice != null) {
+                            Long eId = Long.valueOf(stringChoice.split(": Name")[0]);
+                            tempExercises.add(exerciseService.findExerciseById((Long)eId));
+                        }
+                    }
+                });
+        singleChoiceDialog.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       return;
+                    }
+                });
+        singleChoiceDialog.show();
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -52,6 +106,14 @@ public class DashboardFragment extends Fragment {
         sceanceIntens = root.findViewById(R.id.sceance_intensite);
         sceanceRep = root.findViewById(R.id.sceance_nombre);
         tempExercises = new ArrayList<Exercise>();
+        exerciseService = new ExerciseService();
+        allExercises = exerciseService.findAll();
+        if(items.size()!=allExercises.size()){
+            for(Exercise e: allExercises){
+                items.add(e.getId()+": "+e.toString());
+            }
+        }
+
 
         hourPick = (PickerView) root.findViewById(R.id.hour_pick);
         minutePick = (PickerView) root.findViewById(R.id.minute_pick);
@@ -111,27 +173,13 @@ public class DashboardFragment extends Fragment {
         addExercise = (Button) getActivity().findViewById(R.id.add_one_exercise);
         createSeance = (Button) getActivity().findViewById(R.id.btn_create_seance);
         annuler = (Button) getActivity().findViewById(R.id.btn_cancle_create_seance);
-//        addExercise.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-////                Intent intent= new Intent(getActivity(), LoginActivity.class);
-////                startActivity(intent);
-////                getActivity().finish();
-//                CharSequence[] items=["1","2","3"];
-//                AlertDialog dialog = new AlertDialog.Builder(getActivity().setTitle("单选对话框")
-//                        .setSingleChoiceItems(items, -1, new View.OnClickListener() {
-//
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                Toast.makeText(getActivity(), items[which], Toast.LENGTH_SHORT).show();
-//                                dialog.dismiss();
-//                            }
-//                        }).create();
-//                dialog.show();
-////                tempExercises.add(e);
-//            }
-//        });
+
+        addExercise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showExerciseDialog();
+            }
+        });
 
         createSeance.setOnClickListener(new View.OnClickListener() {
             @Override
