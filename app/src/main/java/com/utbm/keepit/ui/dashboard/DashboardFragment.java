@@ -150,18 +150,29 @@ public class DashboardFragment extends Fragment {
                     Toast.makeText(getActivity(), "please enter name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if(sceanceIntens.getInputStr() == null){
+                else if(sceanceIntens.getInputStr().length()<=0){
                     Toast.makeText(getActivity(), "please choise intencity", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(sceanceRep.getInputStr() == null){
+                }else if(sceanceRep.getInputStr().length()<=0){
                     Toast.makeText(getActivity(), "please enter repeat times", Toast.LENGTH_SHORT).show();
+//                    if()
                     return;
                 }else if(durations == 0){
                     Toast.makeText(getActivity(), "please choose exercise and set duration", Toast.LENGTH_SHORT).show();
                     return;
                 }else{
-                    Integer intencity = Integer.parseInt(sceanceIntens.getInputStr());
-                    Integer repeat = Integer.parseInt(sceanceRep.getInputStr());
+
+                    Integer intencity ;
+                    Integer repeat;
+
+                    try{
+                        intencity = Integer.parseInt(sceanceIntens.getInputStr());
+                        repeat = Integer.parseInt(sceanceRep.getInputStr());
+                    }catch(Exception e){
+                        Toast.makeText(getActivity(), "please entre the numbers in Intensity and repeat times", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    
                     String name = seanceName.getInputStr();
 
                     Seance newS = new Seance(name,durations,intencity,repeat,tempExercises);
