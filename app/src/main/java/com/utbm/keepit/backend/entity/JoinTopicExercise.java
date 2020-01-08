@@ -2,6 +2,7 @@ package com.utbm.keepit.backend.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 @Entity
 public class JoinTopicExercise {

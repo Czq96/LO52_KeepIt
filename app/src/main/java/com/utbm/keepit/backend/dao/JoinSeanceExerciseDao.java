@@ -15,7 +15,7 @@ import com.utbm.keepit.backend.entity.JoinSeanceExercise;
 /** 
  * DAO for table "JOIN_SEANCE_EXERCISE".
 */
-public class JoinSeanceExerciseDao extends AbstractDao<JoinSeanceExercise, Void> {
+public class JoinSeanceExerciseDao extends AbstractDao<JoinSeanceExercise, Long> {
 
     public static final String TABLENAME = "JOIN_SEANCE_EXERCISE";
 
@@ -24,8 +24,11 @@ public class JoinSeanceExerciseDao extends AbstractDao<JoinSeanceExercise, Void>
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property SeanceId = new Property(0, Long.class, "seanceId", false, "SEANCE_ID");
-        public final static Property ExerciseId = new Property(1, Long.class, "exerciseId", false, "EXERCISE_ID");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+        public final static Property SeanceId = new Property(1, Long.class, "seanceId", false, "SEANCE_ID");
+        public final static Property ExerciseId = new Property(2, Long.class, "exerciseId", false, "EXERCISE_ID");
+        public final static Property Duration = new Property(3, int.class, "duration", false, "DURATION");
+        public final static Property ExerciseOrdre = new Property(4, int.class, "exerciseOrdre", false, "EXERCISE_ORDRE");
     }
 
 
@@ -41,8 +44,11 @@ public class JoinSeanceExerciseDao extends AbstractDao<JoinSeanceExercise, Void>
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"JOIN_SEANCE_EXERCISE\" (" + //
-                "\"SEANCE_ID\" INTEGER," + // 0: seanceId
-                "\"EXERCISE_ID\" INTEGER);"); // 1: exerciseId
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
+                "\"SEANCE_ID\" INTEGER," + // 1: seanceId
+                "\"EXERCISE_ID\" INTEGER," + // 2: exerciseId
+                "\"DURATION\" INTEGER NOT NULL ," + // 3: duration
+                "\"EXERCISE_ORDRE\" INTEGER NOT NULL );"); // 4: exerciseOrdre
     }
 
     /** Drops the underlying database table. */
@@ -55,67 +61,90 @@ public class JoinSeanceExerciseDao extends AbstractDao<JoinSeanceExercise, Void>
     protected final void bindValues(DatabaseStatement stmt, JoinSeanceExercise entity) {
         stmt.clearBindings();
  
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
+ 
         Long seanceId = entity.getSeanceId();
         if (seanceId != null) {
-            stmt.bindLong(1, seanceId);
+            stmt.bindLong(2, seanceId);
         }
  
         Long exerciseId = entity.getExerciseId();
         if (exerciseId != null) {
-            stmt.bindLong(2, exerciseId);
+            stmt.bindLong(3, exerciseId);
         }
+        stmt.bindLong(4, entity.getDuration());
+        stmt.bindLong(5, entity.getExerciseOrdre());
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, JoinSeanceExercise entity) {
         stmt.clearBindings();
  
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
+ 
         Long seanceId = entity.getSeanceId();
         if (seanceId != null) {
-            stmt.bindLong(1, seanceId);
+            stmt.bindLong(2, seanceId);
         }
  
         Long exerciseId = entity.getExerciseId();
         if (exerciseId != null) {
-            stmt.bindLong(2, exerciseId);
+            stmt.bindLong(3, exerciseId);
         }
+        stmt.bindLong(4, entity.getDuration());
+        stmt.bindLong(5, entity.getExerciseOrdre());
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
     public JoinSeanceExercise readEntity(Cursor cursor, int offset) {
         JoinSeanceExercise entity = new JoinSeanceExercise( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // seanceId
-            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1) // exerciseId
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // seanceId
+            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // exerciseId
+            cursor.getInt(offset + 3), // duration
+            cursor.getInt(offset + 4) // exerciseOrdre
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, JoinSeanceExercise entity, int offset) {
-        entity.setSeanceId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setExerciseId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setSeanceId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
+        entity.setExerciseId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setDuration(cursor.getInt(offset + 3));
+        entity.setExerciseOrdre(cursor.getInt(offset + 4));
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(JoinSeanceExercise entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final Long updateKeyAfterInsert(JoinSeanceExercise entity, long rowId) {
+        entity.setId(rowId);
+        return rowId;
     }
     
     @Override
-    public Void getKey(JoinSeanceExercise entity) {
-        return null;
+    public Long getKey(JoinSeanceExercise entity) {
+        if(entity != null) {
+            return entity.getId();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(JoinSeanceExercise entity) {
-        // TODO
-        return false;
+        return entity.getId() != null;
     }
 
     @Override

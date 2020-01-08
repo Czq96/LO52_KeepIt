@@ -5,6 +5,7 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.JoinEntity;
 import org.greenrobot.greendao.annotation.ToMany;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
@@ -29,127 +30,137 @@ public class Seance {
             targetProperty = "exerciseId"
     )
     private List<Exercise> listExercises;
-    /** Used to resolve relations */
-    @Generated(hash = 2040040024)
-    private transient DaoSession daoSession;
-    /** Used for active entity operations. */
-    @Generated(hash = 1418926000)
-    private transient SeanceDao myDao;
+/** Used to resolve relations */
+@Generated(hash = 2040040024)
+private transient DaoSession daoSession;
+/** Used for active entity operations. */
+@Generated(hash = 1418926000)
+private transient SeanceDao myDao;
 
-    @Generated(hash = 1562773088)
-    public Seance(Long id, Integer duration, Integer intensity,
-            Integer repeatTimes) {
-        this.id = id;
+    public Seance( Integer duration, Integer intensity,
+            Integer repeatTimes, List<Exercise> listExercise) {
+//        this.id = id;
         this.duration = duration;
         this.intensity = intensity;
         this.repeatTimes = repeatTimes;
+        this.listExercises = new ArrayList<Exercise>(listExercise);
     }
 
-    @Generated(hash = 2117235493)
-    public Seance() {
-    }
+@Generated(hash = 1562773088)
+public Seance(Long id, Integer duration, Integer intensity,
+        Integer repeatTimes) {
+    this.id = id;
+    this.duration = duration;
+    this.intensity = intensity;
+    this.repeatTimes = repeatTimes;
+}
 
-    public Long getId() {
-        return this.id;
-    }
+@Generated(hash = 2117235493)
+public Seance() {
+}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+public Long getId() {
+    return this.id;
+}
 
-    public Integer getDuration() {
-        return this.duration;
-    }
+public void setId(Long id) {
+    this.id = id;
+}
 
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
+public Integer getDuration() {
+    return this.duration;
+}
 
-    public Integer getIntensity() {
-        return this.intensity;
-    }
+public void setDuration(Integer duration) {
+    this.duration = duration;
+}
 
-    public void setIntensity(Integer intensity) {
-        this.intensity = intensity;
-    }
+public Integer getIntensity() {
+    return this.intensity;
+}
 
-    public Integer getRepeatTimes() {
-        return this.repeatTimes;
-    }
+public void setIntensity(Integer intensity) {
+    this.intensity = intensity;
+}
 
-    public void setRepeatTimes(Integer repeatTimes) {
-        this.repeatTimes = repeatTimes;
-    }
+public Integer getRepeatTimes() {
+    return this.repeatTimes;
+}
 
-    /**
-     * To-many relationship, resolved on first access (and after reset).
-     * Changes to to-many relations are not persisted, make changes to the target entity.
-     */
-    @Generated(hash = 74149425)
-    public List<Exercise> getListExercises() {
-        if (listExercises == null) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
+public void setRepeatTimes(Integer repeatTimes) {
+    this.repeatTimes = repeatTimes;
+}
+
+/**
+ * To-many relationship, resolved on first access (and after reset).
+ * Changes to to-many relations are not persisted, make changes to the target entity.
+ */
+@Generated(hash = 74149425)
+public List<Exercise> getListExercises() {
+    if (listExercises == null) {
+        final DaoSession daoSession = this.daoSession;
+        if (daoSession == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        ExerciseDao targetDao = daoSession.getExerciseDao();
+        List<Exercise> listExercisesNew = targetDao
+                ._querySeance_ListExercises(id);
+        synchronized (this) {
+            if (listExercises == null) {
+                listExercises = listExercisesNew;
             }
-            ExerciseDao targetDao = daoSession.getExerciseDao();
-            List<Exercise> listExercisesNew = targetDao
-                    ._querySeance_ListExercises(id);
-            synchronized (this) {
-                if (listExercises == null) {
-                    listExercises = listExercisesNew;
-                }
-            }
         }
-        return listExercises;
     }
+    return listExercises;
+}
 
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    @Generated(hash = 961630282)
-    public synchronized void resetListExercises() {
-        listExercises = null;
-    }
+/** Resets a to-many relationship, making the next get call to query for a fresh result. */
+@Generated(hash = 961630282)
+public synchronized void resetListExercises() {
+    listExercises = null;
+}
 
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 128553479)
-    public void delete() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.delete(this);
+/**
+ * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+ * Entity must attached to an entity context.
+ */
+@Generated(hash = 128553479)
+public void delete() {
+    if (myDao == null) {
+        throw new DaoException("Entity is detached from DAO context");
     }
+    myDao.delete(this);
+}
 
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 1942392019)
-    public void refresh() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.refresh(this);
+/**
+ * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
+ * Entity must attached to an entity context.
+ */
+@Generated(hash = 1942392019)
+public void refresh() {
+    if (myDao == null) {
+        throw new DaoException("Entity is detached from DAO context");
     }
+    myDao.refresh(this);
+}
 
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 713229351)
-    public void update() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.update(this);
+/**
+ * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
+ * Entity must attached to an entity context.
+ */
+@Generated(hash = 713229351)
+public void update() {
+    if (myDao == null) {
+        throw new DaoException("Entity is detached from DAO context");
     }
+    myDao.update(this);
+}
 
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 362389540)
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getSeanceDao() : null;
-    }
+/** called by internal mechanisms, do not call yourself. */
+@Generated(hash = 362389540)
+public void __setDaoSession(DaoSession daoSession) {
+    this.daoSession = daoSession;
+    myDao = daoSession != null ? daoSession.getSeanceDao() : null;
+}
+
 }

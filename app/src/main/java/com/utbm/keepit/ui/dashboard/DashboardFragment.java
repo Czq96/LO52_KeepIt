@@ -1,6 +1,7 @@
 package com.utbm.keepit.ui.dashboard;
 
 import android.app.AlertDialog;
+import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,13 +19,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.utbm.keepit.R;
 import com.utbm.keepit.activities.ChangePwdActivity;
 import com.utbm.keepit.activities.LoginActivity;
+import com.utbm.keepit.activities.MainActivity;
 import com.utbm.keepit.backend.entity.Exercise;
+import com.utbm.keepit.backend.entity.Seance;
 import com.utbm.keepit.backend.service.ExerciseService;
+import com.utbm.keepit.backend.service.SeanceService;
+import com.utbm.keepit.ui.ExerciceListAdapter;
 import com.utbm.keepit.ui.views.InputView;
 import com.utbm.keepit.ui.views.PickerView;
 
@@ -35,28 +42,19 @@ public class DashboardFragment extends Fragment {
 
     private List<Exercise>  tempExercises;
     private ExerciseService exerciseService;
+    private SeanceService seanceService = new SeanceService();
     private List<Exercise>  allExercises;
     public List<String> items = new ArrayList<>();
     String stringChoice;
 
     private RecyclerView exChoosed;
-//    private  topicListAdapter;
-//    rvTopic=root.findViewById(R.id.rv_topic);
-////        rvTopic.addItemDecoration(new GridSpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.marginItemSize),rvGrid));
-//        rvTopic.setNestedScrollingEnabled(false);
-//        rvTopic.setLayoutManager(new GridLayoutManager(this.getContext(),3));
-//    topicListAdapter=new TopicListAdapter(this.getContext(),listTopicData);
-//        rvTopic.setAdapter(topicListAdapter);
+    private ExerciceListAdapter exerciceListAdapter;
 
     private Button addExercise, createSeance, annuler;
-    //
-//    private Long id;
-//    private Integer duration; // 持续时间
-//    private Integer intensity;  // 强度
-//    private Integer repeatTimes; //  seance 的重复次数  比如 一天做三 遍同一组运动
-//    private List<Exercise> listExercises;
+
     private InputView sceanceDuration, sceanceIntens, sceanceRep;
     private PickerView hourPick,secondPick,minutePick;
+    private static String hour,minute,second;
 
 
     private void showExerciseDialog() {
@@ -84,6 +82,7 @@ public class DashboardFragment extends Fragment {
                         if (stringChoice != null) {
                             Long eId = Long.valueOf(stringChoice.split(": Name")[0]);
                             tempExercises.add(exerciseService.findExerciseById((Long)eId));
+                            exerciceListAdapter.notifyDataSetChanged();
                         }
                     }
                 });
@@ -118,17 +117,17 @@ public class DashboardFragment extends Fragment {
         hourPick = (PickerView) root.findViewById(R.id.hour_pick);
         minutePick = (PickerView) root.findViewById(R.id.minute_pick);
         secondPick = (PickerView) root.findViewById(R.id.second_pick);
-        List<String> hour = new ArrayList<String>();
-        List<String> seconds = new ArrayList<String>();
+        List<String> hours = new ArrayList<String>();
+        final List<String> seconds = new ArrayList<String>();
         for (int i = 0; i < 24; i++)
         {
-            hour.add(i < 10 ? "0" + i : "" + i);
+            hours.add(i < 10 ? "0" + i : "" + i);
         }
         for (int i = 0; i < 60; i++)
         {
             seconds.add(i < 10 ? "0" + i : "" + i);
         }
-        hourPick.setData(hour);
+        hourPick.setData(hours);
         hourPick.setOnSelectListener(new PickerView.onSelectListener()
         {
 
@@ -137,6 +136,7 @@ public class DashboardFragment extends Fragment {
             {
 //                Toast.makeText(getActivity(), "选择了 " + text + " 分",
 //                        Toast.LENGTH_SHORT).show();
+                hour = text;
             }
         });
 
@@ -149,6 +149,7 @@ public class DashboardFragment extends Fragment {
             {
 //                Toast.makeText(getActivity().this, "选择了 " + text + " 秒",
 //                        Toast.LENGTH_SHORT).show();
+                minute = text;
             }
         });
         secondPick.setData(seconds);
@@ -160,8 +161,18 @@ public class DashboardFragment extends Fragment {
             {
 //                Toast.makeText(getActivity().this, "选择了 " + text + " 秒",
 //                        Toast.LENGTH_SHORT).show();
+                second = text;
             }
         });
+
+
+        exChoosed=root.findViewById(R.id.exercise_choosed);
+//        rvTopic.addItemDecoration(new GridSpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.marginItemSize),rvGrid));
+        exChoosed.setNestedScrollingEnabled(false);
+
+        exerciceListAdapter =new ExerciceListAdapter(getActivity(),tempExercises);
+        exChoosed.setLayoutManager(new LinearLayoutManager(getActivity()));
+        exChoosed.setAdapter(exerciceListAdapter);
 
         return root;
     }
@@ -184,9 +195,22 @@ public class DashboardFragment extends Fragment {
         createSeance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Integer duration = Integer.parseInt(sceanceDuration.getInputStr());
+
+//                private PickerView hourPick,secondPick,minutePick;
+//                hourPick.
+                Integer duration = Integer.parseInt(hour)*3600+Integer.parseInt(minute)*60+Integer.parseInt(second);
+//                Integer duration = Integer.parseInt(sceanceDuration.getInputStr());
                 Integer intencity = Integer.parseInt(sceanceIntens.getInputStr());
                 Integer repeat = Integer.parseInt(sceanceRep.getInputStr());
+                if(duration == null){
+                    Toast.makeText(getActivity(), "please enter duration", Toast.LENGTH_SHORT).show();
+                }else if(intencity == null){
+                    Toast.makeText(getActivity(), "please choise intencity", Toast.LENGTH_SHORT).show();
+                }else if(repeat == null){
+                    Toast.makeText(getActivity(), "please enter repeat times", Toast.LENGTH_SHORT).show();
+                }
+                Seance newS = new Seance(duration,intencity,repeat,tempExercises);
+                seanceService.createSeance(newS);
 
             }
         });
@@ -194,7 +218,7 @@ public class DashboardFragment extends Fragment {
         annuler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(getActivity(), ChangePwdActivity.class);
+                Intent intent= new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
                 getActivity().finish();
             }

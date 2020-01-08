@@ -31,6 +31,7 @@ public class ExerciceActivity extends AppCompatActivity {
         button=findViewById(R.id.btn_create_exercise);
         List<Exercise> listExerciceData = exerciseService.findByTopicId(tid);//TODO : exercice数据源 根据homefragment传过来的id
         ExerciceList=findViewById(R.id.exercise_list);
+
 //        rvTopic.addItemDecoration(new GridSpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.marginItemSize),rvGrid));
 //        rvTopicItem.setNestedScrollingEnabled(false);
         System.out.println("listsize "+ listExerciceData.size());

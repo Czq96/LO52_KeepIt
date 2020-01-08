@@ -20,9 +20,7 @@ public class MyApp extends Application {
         // regular SQLite database
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "KeepIt");
         Database db = helper.getWritableDb();
-
-      // this.initData(db); //执行过一次了，不需要再次执行
-
+//        this.initData(db); //执行过一次了，不需要再次执行
         daoSession = new DaoMaster(db).newSession();
     }
 
@@ -78,11 +76,11 @@ public class MyApp extends Application {
         db.execSQL("INSERT OR REPLACE INTO Seance(DURATION,INTENSITY,REPEAT_TIMES) VALUES(20,7,5)");
         //插入SeanceExercises
 //            private Long seanceId;
-//            private Long exerciseId;
-        db.execSQL("INSERT OR REPLACE INTO JOIN_SEANCE_EXERCISE(SEANCE_ID,EXERCISE_ID) VALUES(1,1)");
-        db.execSQL("INSERT OR REPLACE INTO JOIN_SEANCE_EXERCISE(SEANCE_ID,EXERCISE_ID) VALUES(2,1)");
-        db.execSQL("INSERT OR REPLACE INTO JOIN_SEANCE_EXERCISE(SEANCE_ID,EXERCISE_ID) VALUES(2,1)");
-        db.execSQL("INSERT OR REPLACE INTO JOIN_SEANCE_EXERCISE(SEANCE_ID,EXERCISE_ID) VALUES(2,2)");
+//            private Long exerciseId;,
+        db.execSQL("INSERT OR REPLACE INTO JOIN_SEANCE_EXERCISE(SEANCE_ID,EXERCISE_ID,DURATION,EXERCISE_ORDRE) VALUES(1,1,2,1)");
+        db.execSQL("INSERT OR REPLACE INTO JOIN_SEANCE_EXERCISE(SEANCE_ID,EXERCISE_ID,DURATION,EXERCISE_ORDRE) VALUES(2,1,1,1)");
+        db.execSQL("INSERT OR REPLACE INTO JOIN_SEANCE_EXERCISE(SEANCE_ID,EXERCISE_ID,DURATION,EXERCISE_ORDRE) VALUES(2,1,2,2)");
+        db.execSQL("INSERT OR REPLACE INTO JOIN_SEANCE_EXERCISE(SEANCE_ID,EXERCISE_ID,DURATION,EXERCISE_ORDRE) VALUES(2,2,3,3)");
         //插入 User
 
         db.execSQL("INSERT OR REPLACE INTO User VALUES('admin','admin')");
