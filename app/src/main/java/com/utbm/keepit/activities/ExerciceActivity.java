@@ -1,6 +1,7 @@
 package com.utbm.keepit.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,19 +34,14 @@ public class ExerciceActivity extends AppCompatActivity {
         ExerciceList=findViewById(R.id.exercise_list);
 
 //        rvTopic.addItemDecoration(new GridSpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.marginItemSize),rvGrid));
-//        rvTopicItem.setNestedScrollingEnabled(false);
-        System.out.println("listsize "+ listExerciceData.size());
-        for(Exercise e: listExerciceData){
-            System.out.println("Exercise data:");
-            System.out.println(e.toString());
-        }
+
         exerciceListAdapter =new ExerciceListAdapter(this,listExerciceData);
         ExerciceList.setLayoutManager(new LinearLayoutManager(this));
+        ExerciceList.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         ExerciceList.setAdapter(exerciceListAdapter);
     }
     public void onCreateExercise(View v){
         Intent intent=new Intent(this,CreateExerciseActivity.class);
-        intent.putExtra("topicid",tid);
         startActivity(intent);
     }
 }

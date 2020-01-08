@@ -19,13 +19,14 @@ import androidx.lifecycle.ViewModelProviders;
 import com.utbm.keepit.R;
 import com.utbm.keepit.activities.ChangePwdActivity;
 import com.utbm.keepit.activities.LoginActivity;
+import com.utbm.keepit.activities.SeanceListActivity;
 
 public class NotificationsFragment extends Fragment {
 
     private NotificationsViewModel notificationsViewModel;
     private TextView userName;
     private Button logoutBtn;
-    private TextView changePwd ;
+    private TextView changePwd ,afficherSeance;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class NotificationsFragment extends Fragment {
 
         logoutBtn = (Button) getActivity().findViewById(R.id.btn_logout);
         changePwd = (TextView) getActivity().findViewById(R.id.change_pwd);
+        afficherSeance=(TextView) getActivity().findViewById(R.id.afficher_seance);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -63,6 +65,13 @@ public class NotificationsFragment extends Fragment {
                 Intent intent= new Intent(getActivity(), ChangePwdActivity.class);
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+        afficherSeance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getActivity(), SeanceListActivity.class);
+                startActivity(intent);
             }
         });
     }

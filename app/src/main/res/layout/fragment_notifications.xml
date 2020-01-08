@@ -37,6 +37,16 @@
             android:text="@string/profile_passwd_change"
             android:onClick="onChangePwdClick"
             />
+    <TextView
+        android:id="@+id/afficher_seance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/titleSize"
+        android:textColor="@color/mainColor"
+        android:text="@string/afficherSeance"
+        android:onClick="onAfficherSeanceClick"
+        />
         <Button
             style="@style/commitBtn"
             android:text="@string/logout"
