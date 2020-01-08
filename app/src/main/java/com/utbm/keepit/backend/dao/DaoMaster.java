@@ -22,21 +22,21 @@ public class DaoMaster extends AbstractDaoMaster {
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
         ExerciseDao.createTable(db, ifNotExists);
-        JoinTopicExerciseDao.createTable(db, ifNotExists);
         JoinSeanceExerciseDao.createTable(db, ifNotExists);
-        UserDao.createTable(db, ifNotExists);
+        JoinTopicExerciseDao.createTable(db, ifNotExists);
         SeanceDao.createTable(db, ifNotExists);
         TopicDao.createTable(db, ifNotExists);
+        UserDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         ExerciseDao.dropTable(db, ifExists);
-        JoinTopicExerciseDao.dropTable(db, ifExists);
         JoinSeanceExerciseDao.dropTable(db, ifExists);
-        UserDao.dropTable(db, ifExists);
+        JoinTopicExerciseDao.dropTable(db, ifExists);
         SeanceDao.dropTable(db, ifExists);
         TopicDao.dropTable(db, ifExists);
+        UserDao.dropTable(db, ifExists);
     }
 
     /**
@@ -56,11 +56,11 @@ public class DaoMaster extends AbstractDaoMaster {
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
         registerDaoClass(ExerciseDao.class);
-        registerDaoClass(JoinTopicExerciseDao.class);
         registerDaoClass(JoinSeanceExerciseDao.class);
-        registerDaoClass(UserDao.class);
+        registerDaoClass(JoinTopicExerciseDao.class);
         registerDaoClass(SeanceDao.class);
         registerDaoClass(TopicDao.class);
+        registerDaoClass(UserDao.class);
     }
 
     public DaoSession newSession() {

@@ -20,7 +20,7 @@ public class MyApp extends Application {
         // regular SQLite database
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "KeepIt");
         Database db = helper.getWritableDb();
-//        this.initData(db); //执行过一次了，不需要再次执行
+       // this.initData(db); //执行过一次了，不需要再次执行
         daoSession = new DaoMaster(db).newSession();
     }
 
@@ -72,8 +72,8 @@ public class MyApp extends Application {
 //            private Integer duration; // 持续时间
 //            private Integer intensity;  // 强度
 //            private Integer repeatTimes;
-        db.execSQL("INSERT OR REPLACE INTO Seance(DURATION,INTENSITY,REPEAT_TIMES) VALUES(10,5,3)");
-        db.execSQL("INSERT OR REPLACE INTO Seance(DURATION,INTENSITY,REPEAT_TIMES) VALUES(20,7,5)");
+        db.execSQL("INSERT OR REPLACE INTO Seance(NAME,DURATION,INTENSITY,REPEAT_TIMES) VALUES('Seance A',10,5,3)");
+        db.execSQL("INSERT OR REPLACE INTO Seance(NAME,DURATION,INTENSITY,REPEAT_TIMES) VALUES('Seance B',20,7,5)");
         //插入SeanceExercises
 //            private Long seanceId;
 //            private Long exerciseId;,
