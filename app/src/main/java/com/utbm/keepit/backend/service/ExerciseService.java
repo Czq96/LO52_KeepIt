@@ -111,7 +111,7 @@ public class ExerciseService {
             long fromId=-1;
             String strSql="select * from EXERCISE e " +
                     "inner join JOIN_SEANCE_EXERCISE te on e._id = te.EXERCISE_ID " +
-                    "where te.SCEANCE_ID = " + SceanceId +"ORDER BY EXERCISE_ORDRE";
+                    "where te.SEANCE_ID = " + SceanceId +" ORDER BY EXERCISE_ORDRE";
             // select * from EXERCISE e inner join JOIN_TOPIC_EXERCISE te on e._id = te.EXERCISE_ID where te.TOPIC_ID = 1
             Cursor c  = session.getDatabase().rawQuery(strSql,null);
             ArrayList<Exercise> list = new ArrayList<Exercise>();

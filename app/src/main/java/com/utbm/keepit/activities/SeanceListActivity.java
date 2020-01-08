@@ -24,6 +24,7 @@ public class SeanceListActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seance_list);
+        seanceList=findViewById(R.id.seance_list);
         seances=seanceService.findAll();
         seanceListAdapter =new SeanceListAdapter(this,seances);
         seanceList.setLayoutManager(new LinearLayoutManager(this));
