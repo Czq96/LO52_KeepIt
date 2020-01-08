@@ -98,10 +98,12 @@ public class StopwatchActivity extends AppCompatActivity {
                             Toast toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 200);
                             ImageView imageView = new ImageView(getApplicationContext());
-                            if (uri != "" || uri != null || uri != " ") {
-                                imageView.setImageResource(R.mipmap.muscle);
+//                            System.out.println(uri.toString());
+                            //TODO: uri verifier()
+                            if (uri.length() > 1) {
+                                imageView.setImageURI(Uri.parse(uri));
                             } else {
-                                imageView.setImageURI(Uri.parse(exe.getImageResource()));
+                                imageView.setImageResource(R.mipmap.muscle);
                             }
                             LinearLayout toastView = (LinearLayout) toast.getView();
                             toastView.setOrientation(LinearLayout.HORIZONTAL);
