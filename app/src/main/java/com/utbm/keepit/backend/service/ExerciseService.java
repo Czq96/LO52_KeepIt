@@ -63,12 +63,13 @@ public class ExerciseService {
         {
             DaoSession session= MyApp.getDaoSession();
             long fromId=-1;
-            String strSql="select * from EXERCISE e inner join JOIN_TOPIC_EXERCISE te on e._id = te.EXERCISE_ID" +
-                    " inner join TOPIC t on te.TOPIC_ID =t._id" +
-                    " where t._id = " + topicId ;
-            Cursor c  = session.getDatabase().rawQuery(strSql,null);
+            String strSql="select * from EXERCISE e " +
+                    "inner join JOIN_TOPIC_EXERCISE te on e._id = te.EXERCISE_ID " +
+                    "where te.TOPIC_ID = " + topicId ;
+                   // select * from EXERCISE e inner join JOIN_TOPIC_EXERCISE te on e._id = te.EXERCISE_ID where te.TOPIC_ID = 1
+                    Cursor c  = session.getDatabase().rawQuery(strSql,null);
             ArrayList<Exercise> list = new ArrayList<Exercise>();
-            if(c.moveToFirst())
+            while(c.moveToNext())
             {
                 Exercise exercise= new Exercise();
                 exercise.setId(c.getLong(c.getColumnIndex("_id")));

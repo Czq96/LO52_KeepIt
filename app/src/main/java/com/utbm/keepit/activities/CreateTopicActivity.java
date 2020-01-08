@@ -37,6 +37,7 @@ import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -144,6 +145,7 @@ public class CreateTopicActivity extends Activity {
             //创建File对象，用于存储拍照后的图片
             String imageFileName = UUID.randomUUID().toString().replace("-", "").toLowerCase();
             File outputImage = new File(getExternalCacheDir(), imageFileName+".jpg");
+
             try {
                 if (outputImage.exists()) {
                     outputImage.delete();
@@ -220,9 +222,41 @@ public class CreateTopicActivity extends Activity {
      * */
     private void handleImageBeforeKitKat(Intent data) {
         Uri uri = data.getData();
-        imageUri=uri;
+
         String imagePath = getImagePath(uri,null);
         displayImage(imagePath);
+
+        String imageFileName = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+        File outputImage = new File(getExternalCacheDir(), imageFileName+".jpg");
+
+        try {
+            if (outputImage.exists()) {
+                outputImage.delete();
+            }
+            outputImage.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileOutputStream fos = new FileOutputStream(outputImage); //获取文件流
+            Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);  //保存成图片
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (Build.VERSION.SDK_INT >= 24) {
+            imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.CreateTopicActivity", outputImage);
+        } else {
+            imageUri = Uri.fromFile(outputImage);
+        }
+
+
+
     }
     /**
      * 4.4及以上系统处理图片的方法
@@ -231,7 +265,35 @@ public class CreateTopicActivity extends Activity {
     private void handleImgeOnKitKat(Intent data) {
         String imagePath = null;
         Uri uri = data.getData();
-        imageUri=uri;
+        String imageFileName = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+        File outputImage = new File(getExternalCacheDir(), imageFileName+".jpg");
+
+        try {
+            if (outputImage.exists()) {
+                outputImage.delete();
+            }
+            outputImage.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileOutputStream fos = new FileOutputStream(outputImage); //获取文件流
+            Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);  //保存成图片
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (Build.VERSION.SDK_INT >= 24) {
+            imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.CreateTopicActivity", outputImage);
+        } else {
+            imageUri = Uri.fromFile(outputImage);
+        }
+
         if (DocumentsContract.isDocumentUri(this,uri)) {
             //如果是document类型的uri，则通过document id处理
             String docId = DocumentsContract.getDocumentId(uri);
