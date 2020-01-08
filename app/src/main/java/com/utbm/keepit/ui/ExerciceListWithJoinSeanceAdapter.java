@@ -12,14 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.utbm.keepit.R;
-import com.utbm.keepit.backend.entity.Exercise;
+import com.utbm.keepit.backend.service.ExerciseWithJoinSeance;
 
 import java.util.List;
 
-public class ExerciceListAdapter extends RecyclerView.Adapter<ExerciceListAdapter.ViewHolder> {
+public class ExerciceListWithJoinSeanceAdapter extends RecyclerView.Adapter<ExerciceListWithJoinSeanceAdapter.ViewHolder> {
     private Context context;
-    private List<Exercise> exercises;
-    public ExerciceListAdapter(Context context, List<Exercise> exercises){
+    private List<ExerciseWithJoinSeance> exercises;
+    public ExerciceListWithJoinSeanceAdapter(Context context, List<ExerciseWithJoinSeance> exercises){
         this.context=context;
         this.exercises=exercises;
     }
@@ -27,28 +27,29 @@ public class ExerciceListAdapter extends RecyclerView.Adapter<ExerciceListAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ExerciceListAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.exercise_item,parent,false));
+        return new ExerciceListWithJoinSeanceAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.exercise_with_joinseance_item,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         System.out.println(exercises.get(position).toString());
 //        System.out.println(exercises.get(position).getImageResource().toString());
-        if(exercises.get(position).getImageResource()== null ){
+        if(exercises.get(position).e.getImageResource()== null ){
             //  Uri imageUri = Uri.parse((String) str);
             holder.imageView.setImageResource(R.mipmap.muscle);
 
-        }else if(exercises.get(position).getImageResource()== ""||exercises.get(position).getImageResource()== " "){
+        }else if(exercises.get(position).e.getImageResource()== ""||exercises.get(position).e.getImageResource()== " "){
             holder.imageView.setImageResource(R.mipmap.dos);
         }
         else{
-            holder.imageView.setImageURI( Uri.parse( exercises.get(position).getImageResource()));
+            holder.imageView.setImageURI( Uri.parse( exercises.get(position).e.getImageResource()));
 //            android:src="@mipmap/dos"
         }
-        holder.exercise_name.setText(exercises.get(position).getName());
-        holder.exercise_public.setText("Type:"+exercises.get(position).getTypePublic());
-        holder.exercise_level.setText("Level:"+exercises.get(position).getLevelGroup());
-        holder.exercise_diff.setText("Diffculité:"+exercises.get(position).getLevelDifficult());
+        holder.exercise_name.setText(exercises.get(position).e.getName());
+        holder.exercise_public.setText(""+exercises.get(position).e.getTypePublic());
+        holder.exercise_level.setText(""+exercises.get(position).e.getLevelGroup());
+        holder.exercise_diff.setText(""+exercises.get(position).e.getLevelDifficult());
+        holder.exercise_duration.setText(""+exercises.get(position).jse.getDuration()+" s");
     }
 
     @Override
@@ -59,6 +60,8 @@ public class ExerciceListAdapter extends RecyclerView.Adapter<ExerciceListAdapte
     class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
         TextView exercise_name,exercise_public,exercise_level,exercise_diff;
+
+        TextView exercise_duration;
         View itemView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,6 +71,7 @@ public class ExerciceListAdapter extends RecyclerView.Adapter<ExerciceListAdapte
             exercise_public=itemView.findViewById(R.id.exercise_public);
             exercise_level=itemView.findViewById(R.id.exercise_level);
             exercise_diff=itemView.findViewById(R.id.exercise_diff);
+            exercise_duration = itemView.findViewById(R.id.exercise_duration);
 
 
         }

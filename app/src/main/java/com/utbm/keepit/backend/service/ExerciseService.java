@@ -1,15 +1,19 @@
 package com.utbm.keepit.backend.service;
 
 import android.database.Cursor;
+import android.graphics.Paint;
 import android.util.Log;
 
 import com.utbm.keepit.MyApp;
 import com.utbm.keepit.backend.dao.DaoSession;
 import com.utbm.keepit.backend.dao.ExerciseDao;
 import com.utbm.keepit.backend.entity.Exercise;
+import com.utbm.keepit.backend.entity.JoinSeanceExercise;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
@@ -104,7 +108,7 @@ public class ExerciseService {
             return flag;
         }
     }
-    public List<Exercise> findBySceanceId(long SceanceId){
+    public ArrayList<ExerciseWithJoinSeance> findBySceanceId(long SceanceId){
         try
         {
             DaoSession session= MyApp.getDaoSession();
@@ -114,7 +118,8 @@ public class ExerciseService {
                     "where te.SEANCE_ID = " + SceanceId +" ORDER BY EXERCISE_ORDRE";
             // select * from EXERCISE e inner join JOIN_TOPIC_EXERCISE te on e._id = te.EXERCISE_ID where te.TOPIC_ID = 1
             Cursor c  = session.getDatabase().rawQuery(strSql,null);
-            ArrayList<Exercise> list = new ArrayList<Exercise>();
+            //Map<Exercise, JoinSeanceExercise> datas = new HashMap<Exercise,JoinSeanceExercise>();
+            ArrayList<ExerciseWithJoinSeance> list = new ArrayList<>();
             while(c.moveToNext())
             {
                 Exercise exercise= new Exercise();
@@ -125,7 +130,12 @@ public class ExerciseService {
                 exercise.setTypePublic(c.getInt(c.getColumnIndex("TYPE_PUBLIC")));
                 exercise.setLevelGroup(c.getInt(c.getColumnIndex("LEVEL_GROUP")));
                 exercise.setImageResource(c.getString(c.getColumnIndex("IMAGE_RESOURCE")));
-                list.add(exercise);
+                JoinSeanceExercise joinSeanceExercise = new JoinSeanceExercise();
+                joinSeanceExercise.setDuration(c.getInt(c.getColumnIndex("DURATION")));
+                joinSeanceExercise.setExerciseOrdre(c.getInt(c.getColumnIndex("EXERCISE_ORDRE")));
+                list.add(new ExerciseWithJoinSeance(exercise,joinSeanceExercise));
+
+//                list.add(exercise);
             }
             c.close();
             return list;
