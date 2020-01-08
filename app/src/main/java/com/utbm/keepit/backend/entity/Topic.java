@@ -32,6 +32,10 @@ public class Topic {
             targetProperty = "exerciseId"
     )
     private List<Exercise> listExercises;
+
+    public String toEasyString(){
+        return this.getId()+": "+this.getTopicName();
+    }
 /** Used to resolve relations */
 @Generated(hash = 2040040024)
 private transient DaoSession daoSession;

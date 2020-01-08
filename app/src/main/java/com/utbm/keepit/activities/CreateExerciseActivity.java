@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentUris;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -28,15 +29,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.utbm.keepit.R;
 import com.utbm.keepit.backend.entity.Exercise;
+import com.utbm.keepit.backend.entity.ExerciseDataToDesciption;
 import com.utbm.keepit.backend.entity.JoinTopicExercise;
+import com.utbm.keepit.backend.entity.Topic;
 import com.utbm.keepit.backend.service.ExerciseService;
+import com.utbm.keepit.backend.service.JoinTopicExerciseService;
+import com.utbm.keepit.backend.service.TopicService;
+import com.utbm.keepit.ui.StringListAdapter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,13 +53,31 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class CreateExerciseActivity extends AppCompatActivity {
+
     private ExerciseService exerciseService = new ExerciseService();
-    private JoinTopicExercise joinTopicExercise=new JoinTopicExercise();
+    private JoinTopicExerciseService jteService=new JoinTopicExerciseService();
+    private List<JoinTopicExercise> jtes = new ArrayList<>(); //待创建的 joinTopicExercise
+
+    private TopicService topicService = new TopicService();
+    private AlertDialog alertTopicDialog;
+    private List<Topic> allTopics;
+    private String[] topicItem; // 弹出框的选项内容
+    private List<String> chickedTopic = new ArrayList<>(); // 弹出框中选中的 Topic
+    private List<String> topicsToAdd = new ArrayList<>(); // 创建Exercise界面的 Topics
+    private RecyclerView topics; // id => topics_selected
+    private StringListAdapter topicsChosedAdapter;
+
      private EditText execName,execDesc;
-    private Button take_photo,select_photo;
+     private Long tid;
+    private Button take_photo,select_photo,selectTopic;
+
+    private static List<String> topic_items = new ArrayList<>();
+    private List<Long> topicIdSelected = new ArrayList<>();
+
     //    private Button takePhoto,selectPhoto, createSeance, cancleCreate;
     public static final int TAKE_PHOTO = 1;
     public static final int SELECT_PHOTO = 2;
@@ -68,18 +95,30 @@ public class CreateExerciseActivity extends AppCompatActivity {
         take_photo = (Button) findViewById(R.id.take_photo);
         select_photo = (Button) findViewById(R.id.select_photo);
         imageview = (ImageView) findViewById(R.id.image_selected);
+
+        selectTopic = (Button) findViewById(R.id.select_topics);
+        allTopics = topicService.findAll();
+        topicItem= new String[allTopics.size()];
+        for(int i=0;i<allTopics.size();i++){
+            topicItem[i]=allTopics.get(i).getId()+" : "+allTopics.get(i).getTopicName();
+        }
+
+        tid=getIntent().getExtras().getLong("topicid"); //传入的 activity的id TODO; 默认选中该 topic
         execName=findViewById(R.id.input_exercise_name);
         execDesc=findViewById(R.id.input_exercise_desc);
-        typeList.add("Jeune");
-        typeList.add("Adulte");
-        typeList.add("Les deux");
-        groupList.add("Junior");
-        groupList.add("senior");
-        groupList.add("professional");
-        diffList.add("0");
-        diffList.add("1");
-        diffList.add("2");
-        diffList.add("3");
+        //ExerciseDataToDesciption.descripGroup
+//        ExerciseDataToDesciption.descripDifficult
+//        ExerciseDataToDesciption.descripPublic
+        for( Map.Entry<Integer, String> entry : ExerciseDataToDesciption.descripPublic.entrySet()){
+            typeList.add(entry.getValue());
+        }
+        for( Map.Entry<Integer, String> entry : ExerciseDataToDesciption.descripGroup.entrySet()){
+            groupList.add(entry.getValue());
+        }
+        for( Map.Entry<Integer, String> entry : ExerciseDataToDesciption.descripDifficult.entrySet()){
+            diffList.add(entry.getValue());
+        }
+
         spinnerType=findViewById(R.id.input_exercise_type);
         adapterType=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,typeList);
         adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -94,6 +133,32 @@ public class CreateExerciseActivity extends AppCompatActivity {
         adapterGroup=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,groupList);
         adapterGroup.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGroup.setAdapter(adapterGroup);
+
+        for(Topic t : topicService.findAll()){
+            topic_items.add(t.toEasyString());
+        }
+        selectTopic.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            openMultiChoiDialog(v);
+            }
+        });
+
+        //
+//        exChoosed=root.findViewById(R.id.exercise_choosed);
+//        exChoosed.setNestedScrollingEnabled(false);
+//
+//        exerciceListAdapter =new ExerciceChoosedListAdapter(getActivity(),tempExercises,tempSeanceExercise);
+//        exChoosed.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        exChoosed.setAdapter(exerciceListAdapter);
+        topics = findViewById(R.id.topics_selected);
+        topics.setNestedScrollingEnabled(false);
+        topicsChosedAdapter = new StringListAdapter(CreateExerciseActivity.this,topicsToAdd);
+        topics.setLayoutManager(new LinearLayoutManager(CreateExerciseActivity.this));
+        topics.setAdapter(topicsChosedAdapter);
+
+
+
         take_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +176,66 @@ public class CreateExerciseActivity extends AppCompatActivity {
         });
 
     }
+
+    public void openMultiChoiDialog(View view){
+        // 多选提示框
+            final String[] items = topicItem;
+
+            AlertDialog.Builder alertDialogBuilder= new AlertDialog.Builder(this);
+            // 设置标题
+            alertDialogBuilder.setTitle("Choisir les topics");
+            // 参数介绍
+            // 第一个参数：弹出框的信息集合，一般为字符串集合
+            // 第二个参数：被默认选中的，一个布尔类型的数组
+            // 第三个参数：勾选事件监听
+        //TODO : checkedItems = chickedTopic
+            alertDialogBuilder.setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                    // dialog：不常使用，弹出框接口
+                    // which：勾选或取消的是第几个
+                    // isChecked：是否勾选
+                    if (isChecked) {
+                        chickedTopic.add(items[which]);
+                        Toast.makeText(CreateExerciseActivity.this, "Choose "+items[which], Toast.LENGTH_SHORT).show();
+                    }else {
+                        chickedTopic.remove(items[which]);
+                        // 取消选中
+                        Toast.makeText(CreateExerciseActivity.this, "cancel choose"+items[which], Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+            alertDialogBuilder.setPositiveButton("Ajouter Topics", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface arg0, int arg1) {
+                    //
+                    topicsToAdd.clear();
+                    for(String s: chickedTopic){
+                        topicsToAdd.add(s);
+                    }
+                    System.out.println(topicsToAdd.toArray());
+                    topicsChosedAdapter.notifyDataSetChanged();
+                    chickedTopic.clear();
+                    // 关闭提示框
+                    alertTopicDialog.dismiss();
+                }
+            });
+            alertDialogBuilder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface arg0, int arg1) {
+                    // 取消的时候清空已经选择的主题，防止重复选择
+                    chickedTopic.clear();
+                    // 关闭提示框
+                    alertTopicDialog.dismiss();
+                }
+            });
+        alertTopicDialog = alertDialogBuilder.create();
+        alertTopicDialog.show();
+    }
+
     /**
      *拍照获取图片
      **/
@@ -330,21 +455,51 @@ public class CreateExerciseActivity extends AppCompatActivity {
                 break;
         }
     }
-    //TODO 加入exer图片以及对相应的中间表插入topic-exercise
+
     public void onCreateExercise(View v){
-        String name=execName.getText().toString();
-        String desc=execDesc.getText().toString();
-        Integer type=spinnerType.getSelectedItemPosition();
-        Integer group=spinnerGroup.getSelectedItemPosition();
-        Integer diff=spinnerDiff.getSelectedItemPosition();
-        Exercise exercise=new Exercise();
-        exercise.setDescription(desc);
-        exercise.setName(name);
-        exercise.setLevelDifficult(diff);
-        exercise.setLevelGroup(group);
-        exercise.setTypePublic(type);
+        if(execName.getText()==null){
+            Toast.makeText(CreateExerciseActivity.this,"entre nom de entraînment",Toast.LENGTH_SHORT).show();
+        }// TODO : 重复性劳动 (else if )for execDesc  spinnerType  spinnerGroup spinnerDiff
+        // 没有数据时候的报错 有问题
+        else{
+//            1.插入exercise  返回 id
+
+            String name=execName.getText().toString();
+            String desc=execDesc.getText().toString();
+
+             Integer diff = ExerciseDataToDesciption.getKey(
+                     ExerciseDataToDesciption.descripDifficult,
+                     diffList.get(spinnerDiff.getSelectedItemPosition()));
+
+            Integer type=ExerciseDataToDesciption.getKey(
+                    ExerciseDataToDesciption.descripPublic,
+                    typeList.get(spinnerDiff.getSelectedItemPosition()));
+
+            Integer group=ExerciseDataToDesciption.getKey(
+                    ExerciseDataToDesciption.descripGroup,
+                    groupList.get(spinnerDiff.getSelectedItemPosition()));
+
+            Exercise exercise=new Exercise();
+            exercise.setDescription(desc);
+            exercise.setName(name);
+            exercise.setLevelDifficult(diff);
+            exercise.setLevelGroup(group);
+            exercise.setTypePublic(type);
 //        exercise.setImageResource();
-        exerciseService.createExercise(exercise);
-//利用tid插入中间表
+            long newExerId =  exerciseService.createExercise(exercise);
+
+            //插入中间表  2.插入JoinTpicExercise
+            //TODO： -1
+            if(newExerId != -1){
+                for(String s: topicsToAdd){
+                    Long topicId = Long.valueOf(s.split(" : ")[0]);
+
+                    JoinTopicExercise jte = new JoinTopicExercise(topicId,newExerId);
+                    jteService.createJoinTopicExercise(jte);
+                }
+                Toast.makeText(CreateExerciseActivity.this,"insert success",Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 }

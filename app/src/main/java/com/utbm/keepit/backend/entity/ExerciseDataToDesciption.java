@@ -1,6 +1,7 @@
 package com.utbm.keepit.backend.entity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ExerciseDataToDesciption {
@@ -29,7 +30,13 @@ public class ExerciseDataToDesciption {
         descripPublic.put(1,"Mineur");
         descripPublic.put(2,"Adulte");
         descripPublic.put(3,"Vielle");}
-//    public static void initExerciseDataToDesciption(){
-//
-//    }
+
+    public static int getKey(Map map, Object value){
+        for(Object key: map.keySet()){
+            if(map.get(key).equals(value)){
+                return Integer.parseInt(key.toString());
+            }
+        }
+        return -1;
+    }
 }

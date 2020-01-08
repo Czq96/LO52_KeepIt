@@ -21,16 +21,15 @@ public class ExerciseService {
         exerciseDao = daoSession.getExerciseDao();
     }
     //CRUD
-    public boolean createExercise(Exercise exercise){
-        boolean flag = false;
+    public long createExercise(Exercise exercise){
+        long eId = -1;
         try{
             exerciseDao.insert(exercise);
-            flag = true;
+            eId = exerciseDao.getKey(exercise);
         }catch (Exception e){
             Log.i(TAG, "createExercise: "+e.toString());
-            flag=false;
         }finally {
-            return flag;
+            return eId;
         }
     }
 
