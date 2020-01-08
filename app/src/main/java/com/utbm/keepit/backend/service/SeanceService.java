@@ -19,16 +19,16 @@ public class SeanceService {
         seanceDao = daoSession.getSeanceDao();
     }
     //CRUD
-    public boolean createSeance(Seance seance){
-        boolean flag = false;
+    public Long createSeance(Seance seance){
+        Long newId = Long.valueOf(-1);
         try{
             seanceDao.insert(seance);
-            flag = true;
+            newId = seanceDao.getKey(seance);
+            System.out.println("newID: " + newId);
         }catch (Exception e){
             Log.i(TAG, "createSeance: "+e.toString());
-            flag=false;
         }finally {
-            return flag;
+            return newId;
         }
     }
 

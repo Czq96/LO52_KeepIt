@@ -32,6 +32,7 @@ import com.utbm.keepit.backend.entity.Exercise;
 import com.utbm.keepit.backend.entity.JoinSeanceExercise;
 import com.utbm.keepit.backend.entity.Seance;
 import com.utbm.keepit.backend.service.ExerciseService;
+import com.utbm.keepit.backend.service.JoinSeanceExerciseService;
 import com.utbm.keepit.backend.service.SeanceService;
 import com.utbm.keepit.ui.ExerciceChoosedListAdapter;
 import com.utbm.keepit.ui.ExerciceListAdapter;
@@ -47,10 +48,11 @@ public class DashboardFragment extends Fragment {
     private List<JoinSeanceExercise> tempSeanceExercise;
 
     private ExerciseService exerciseService;
+    private JoinSeanceExerciseService jseService = new JoinSeanceExerciseService();
     private SeanceService seanceService = new SeanceService();
+
     private List<Exercise>  allExercises;
     public List<String> items = new ArrayList<>();
-    String stringChoice;
 
     private RecyclerView exChoosed;
     private ExerciceChoosedListAdapter exerciceListAdapter;
@@ -139,34 +141,38 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-//                private PickerView hourPick,secondPick,minutePick;
-//                hourPick.
-
-
                 Integer durations = 0;
                 for(JoinSeanceExercise jse: tempSeanceExercise){
                     durations+=jse.getDuration();
                 }
-                Integer intencity = Integer.parseInt(sceanceIntens.getInputStr());
-                Integer repeat = Integer.parseInt(sceanceRep.getInputStr());
-                String name = seanceName.getInputStr();
-                if(name == null){
+
+                if(seanceName.getInputStr() == null){
                     Toast.makeText(getActivity(), "please enter name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(sceanceIntens.getInputStr() == null){
+                    Toast.makeText(getActivity(), "please choise intencity", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if(sceanceRep.getInputStr() == null){
+                    Toast.makeText(getActivity(), "please enter repeat times", Toast.LENGTH_SHORT).show();
                     return;
                 }else if(durations == 0){
                     Toast.makeText(getActivity(), "please choose exercise and set duration", Toast.LENGTH_SHORT).show();
                     return;
+                }else{
+                    Integer intencity = Integer.parseInt(sceanceIntens.getInputStr());
+                    Integer repeat = Integer.parseInt(sceanceRep.getInputStr());
+                    String name = seanceName.getInputStr();
+
+                    Seance newS = new Seance(name,durations,intencity,repeat,tempExercises);
+                    Long seanceId = seanceService.createSeance(newS);
+                    for(JoinSeanceExercise jse: tempSeanceExercise){
+                        jse.setSeanceId(seanceId);
+                        jseService.createJoinSeanceExercise(jse);
+                    }
+                    Toast.makeText(getActivity(), "insert success", Toast.LENGTH_SHORT).show();
+                    // TODO: return fragement  或者  activity返回到fragment
                 }
-                else if(intencity == null){
-                    Toast.makeText(getActivity(), "please choise intencity", Toast.LENGTH_SHORT).show();
-                    return;
-                }else if(repeat == null){
-                    Toast.makeText(getActivity(), "please enter repeat times", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Seance newS = new Seance(name,durations,intencity,repeat,tempExercises);
-                seanceService.createSeance(newS);
-                // TODO: return fragement  或者  activity返回到fragment
             }
         });
 
