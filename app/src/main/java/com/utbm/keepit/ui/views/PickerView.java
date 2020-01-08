@@ -38,7 +38,8 @@ public class PickerView extends View
 
     private List<String> mDataList;
     /**
-     * 选中的位置，这个位置是mDataList的中心位置，一直不变
+     * //选中的位置，这个位置是mDataList的中心位置，一直不变
+     * 从第一个开始
      */
     private int mCurrentSelected;
     private Paint mPaint;
@@ -114,7 +115,7 @@ public class PickerView extends View
     public void setData(List<String> datas)
     {
         mDataList = datas;
-        mCurrentSelected = datas.size() / 2;
+        mCurrentSelected = 0;
         invalidate();
     }
 

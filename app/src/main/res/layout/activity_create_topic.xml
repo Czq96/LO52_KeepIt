@@ -19,7 +19,7 @@
     <View
         style="@style/line"
         android:layout_width="wrap_content"
-        android:layout_below="@id/sceance_duree" />
+        android:layout_below="@id/in_topic_name" />
 
     <Button
         android:id="@+id/take_photo"

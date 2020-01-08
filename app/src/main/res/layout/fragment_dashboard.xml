@@ -14,75 +14,19 @@
 
 
     <com.utbm.keepit.ui.views.InputView
-        android:id="@+id/sceance_duree"
+        android:id="@+id/sceance_name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputViewHeight"
 
-        app:input_hint="@string/sceance_duree"
+        app:input_hint="Nom: "
         app:is_passwd="false"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="47dp" />
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/sceance_duree">
-
-        <com.utbm.keepit.ui.views.PickerView
-            android:id="@+id/hour_pick"
-            android:layout_width="80dp"
-            android:layout_height="160dp" />
-
-        <TextView
-            android:id="@+id/hour_tp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/hour_pick"
-            android:text="H"
-            android:textColor="#ffaa33"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <com.utbm.keepit.ui.views.PickerView
-            android:id="@+id/minute_pick"
-            android:layout_width="80dp"
-            android:layout_height="160dp"
-            android:layout_toRightOf="@id/hour_tp" />
-
-        <TextView
-            android:id="@+id/minute_t"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/minute_pick"
-            android:text="M"
-            android:textColor="#ffaa33"
-            android:textSize="26sp"
-            android:textStyle="bold" />
-
-        <com.utbm.keepit.ui.views.PickerView
-            android:id="@+id/second_pick"
-            android:layout_width="80dp"
-            android:layout_height="160dp"
-            android:layout_toRightOf="@id/minute_t" />
-
-        <TextView
-            android:id="@+id/second_t"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/second_pick"
-            android:text="S"
-            android:textColor="#ffaa33"
-            android:textSize="26sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
 
     <View
         style="@style/line"
         android:layout_width="wrap_content"
-        android:layout_below="@id/sceance_duree" />
-
+        android:layout_below="@id/sceance_name" />
 
     <com.utbm.keepit.ui.views.InputView
         android:id="@+id/sceance_intensite"
