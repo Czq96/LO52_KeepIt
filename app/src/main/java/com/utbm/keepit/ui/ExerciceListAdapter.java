@@ -45,9 +45,9 @@ public class ExerciceListAdapter extends RecyclerView.Adapter<ExerciceListAdapte
 //            android:src="@mipmap/dos"
         }
         holder.exercise_name.setText(exercises.get(position).getName());
-        holder.exercise_public.setText(""+exercises.get(position).getTypePublic());
-        holder.exercise_level.setText(""+exercises.get(position).getLevelGroup());
-        holder.exercise_diff.setText(""+exercises.get(position).getLevelDifficult());
+        holder.exercise_public.setText("Type:"+exercises.get(position).getTypePublic());
+        holder.exercise_level.setText("Level:"+exercises.get(position).getLevelGroup());
+        holder.exercise_diff.setText("Diffculité:"+exercises.get(position).getLevelDifficult());
     }
 
     @Override
