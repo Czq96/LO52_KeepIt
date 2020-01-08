@@ -15,7 +15,7 @@
     <string name="changepwd_pwdo_hint">Please enter the old password</string>
     <string name="changepwd_pwdn_hint">Please enter the new password</string>
     <string name="changepwd_pwdc_hint">Please confirm the password</string>
-    <string name="title_home"> JUST KEEP IT</string>
+    <string name="title_home"> Topics</string>
     <string name="title_dashboard">Créer un scéance</string>
     <string name="title_notifications"> Profile</string>
     <string name="sceance_nom"> Nom : </string>

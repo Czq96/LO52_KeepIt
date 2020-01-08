@@ -457,10 +457,14 @@ public class CreateExerciseActivity extends AppCompatActivity {
     }
 
     public void onCreateExercise(View v){
-        if(execName.getText()==null){
-            Toast.makeText(CreateExerciseActivity.this,"entre nom de entraînment",Toast.LENGTH_SHORT).show();
-        }// TODO : 重复性劳动 (else if )for execDesc  spinnerType  spinnerGroup spinnerDiff
-        // 没有数据时候的报错 有问题
+       // System.out.println("==============================="+ execName.getText().toString());
+        if(execName.getText().toString().length()<1){
+            Toast.makeText(CreateExerciseActivity.this,"please entre nom de entraînment",Toast.LENGTH_SHORT).show();
+            return;
+        }else if(execDesc.getText().toString().length()<1){
+            Toast.makeText(CreateExerciseActivity.this,"please entre descrption",Toast.LENGTH_SHORT).show();
+            return;
+        }
         else{
 //            1.插入exercise  返回 id
 
@@ -485,7 +489,9 @@ public class CreateExerciseActivity extends AppCompatActivity {
             exercise.setLevelDifficult(diff);
             exercise.setLevelGroup(group);
             exercise.setTypePublic(type);
-            exercise.setImageResource(imageUri.toString());
+            if(imageUri!=null){
+                exercise.setImageResource(imageUri.toString());
+            }
 //        exercise.setImageResource();
             long newExerId =  exerciseService.createExercise(exercise);
 
@@ -500,6 +506,9 @@ public class CreateExerciseActivity extends AppCompatActivity {
                 }
                 Toast.makeText(CreateExerciseActivity.this,"insert success",Toast.LENGTH_SHORT).show();
             }
+
+            Intent intent = new Intent(CreateExerciseActivity.this,MainActivity.class);
+            startActivity(intent);
 
         }
     }
