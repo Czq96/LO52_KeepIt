@@ -103,7 +103,7 @@ public class CreateExerciseActivity extends AppCompatActivity {
             topicItem[i]=allTopics.get(i).getId()+" : "+allTopics.get(i).getTopicName();
         }
 
-        tid=getIntent().getExtras().getLong("topicid"); //传入的 activity的id TODO; 默认选中该 topic
+//        tid=getIntent().getExtras().getLong("topicid"); //传入的 activity的id TODO; 默认选中该 topic
         execName=findViewById(R.id.input_exercise_name);
         execDesc=findViewById(R.id.input_exercise_desc);
         //ExerciseDataToDesciption.descripGroup

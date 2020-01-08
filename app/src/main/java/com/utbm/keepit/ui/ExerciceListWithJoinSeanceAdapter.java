@@ -46,10 +46,10 @@ public class ExerciceListWithJoinSeanceAdapter extends RecyclerView.Adapter<Exer
 //            android:src="@mipmap/dos"
         }
         holder.exercise_name.setText(exercises.get(position).e.getName());
-        holder.exercise_public.setText(""+exercises.get(position).e.getTypePublic());
-        holder.exercise_level.setText(""+exercises.get(position).e.getLevelGroup());
-        holder.exercise_diff.setText(""+exercises.get(position).e.getLevelDifficult());
-        holder.exercise_duration.setText(""+exercises.get(position).jse.getDuration()+" s");
+        holder.exercise_public.setText("Type:"+exercises.get(position).e.getTypePublic());
+        holder.exercise_level.setText("Level:"+exercises.get(position).e.getLevelGroup());
+        holder.exercise_diff.setText("Diffculité:"+exercises.get(position).e.getLevelDifficult());
+        holder.exercise_duration.setText("Duration:"+exercises.get(position).jse.getDuration()+" s");
     }
 
     @Override

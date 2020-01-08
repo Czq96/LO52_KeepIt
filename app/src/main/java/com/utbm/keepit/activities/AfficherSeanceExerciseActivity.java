@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +27,7 @@ public class AfficherSeanceExerciseActivity extends AppCompatActivity {
     private Long tid;
     private ExerciceListWithJoinSeanceAdapter exerciceListAdapter;
     private ExerciseService exerciseService = new ExerciseService();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,13 @@ public class AfficherSeanceExerciseActivity extends AppCompatActivity {
 
         exerciceListAdapter =new ExerciceListWithJoinSeanceAdapter(this,listExerciceData);
         ExerciceList.setLayoutManager(new LinearLayoutManager(this));
+        ExerciceList.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         ExerciceList.setAdapter(exerciceListAdapter);
+    }
+    public void onBtnStart(View v){
+        Intent intent = new Intent(this,MainActivity.class);//changer
+        intent.putExtra("seanceid",tid);
+        startActivity(intent);
     }
 //
 }
