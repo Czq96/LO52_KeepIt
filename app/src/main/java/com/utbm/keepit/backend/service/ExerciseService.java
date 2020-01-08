@@ -104,4 +104,37 @@ public class ExerciseService {
             return flag;
         }
     }
+    public List<Exercise> findBySceanceId(long SceanceId){
+        try
+        {
+            DaoSession session= MyApp.getDaoSession();
+            long fromId=-1;
+            String strSql="select * from EXERCISE e " +
+                    "inner join JOIN_SEANCE_EXERCISE te on e._id = te.EXERCISE_ID " +
+                    "where te.SCEANCE_ID = " + SceanceId +"ORDER BY EXERCISE_ORDRE";
+            // select * from EXERCISE e inner join JOIN_TOPIC_EXERCISE te on e._id = te.EXERCISE_ID where te.TOPIC_ID = 1
+            Cursor c  = session.getDatabase().rawQuery(strSql,null);
+            ArrayList<Exercise> list = new ArrayList<Exercise>();
+            while(c.moveToNext())
+            {
+                Exercise exercise= new Exercise();
+                exercise.setId(c.getLong(c.getColumnIndex("_id")));
+                exercise.setDescription(c.getString(c.getColumnIndex("DESCRIPTION")));
+                exercise.setName(c.getString(c.getColumnIndex("NAME")));
+                exercise.setLevelDifficult(c.getInt(c.getColumnIndex("LEVEL_DIFFICULT")));
+                exercise.setTypePublic(c.getInt(c.getColumnIndex("TYPE_PUBLIC")));
+                exercise.setLevelGroup(c.getInt(c.getColumnIndex("LEVEL_GROUP")));
+                exercise.setImageResource(c.getString(c.getColumnIndex("IMAGE_RESOURCE")));
+                list.add(exercise);
+            }
+            c.close();
+            return list;
+        }
+        catch (Exception ex)
+        {
+            ex.getMessage();
+
+        }
+        return null;
+    }
 }
