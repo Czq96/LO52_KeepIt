@@ -40,8 +40,8 @@ public class SeanceListAdapter extends RecyclerView.Adapter<SeanceListAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.name.setText(seances.get(position).getName());
-        holder.duration.setText(seances.get(position).getDuration().toString());
-        holder.intensity.setText(seances.get(position).getIntensity().toString());
+        holder.duration.setText("Duration:"+seances.get(position).getDuration());
+        holder.intensity.setText("Intensity:"+seances.get(position).getIntensity().toString());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
