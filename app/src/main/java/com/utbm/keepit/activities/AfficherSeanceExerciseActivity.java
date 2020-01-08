@@ -1,5 +1,5 @@
 package com.utbm.keepit.activities;
-
+//TODO : start 按钮或者计时结束的问题
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -55,7 +55,7 @@ public class AfficherSeanceExerciseActivity extends AppCompatActivity {
         ExerciceList.setAdapter(exerciceListAdapter);
     }
     public void onBtnStart(View v){
-        Intent intent = new Intent(this,MainActivity.class);//changer
+        Intent intent = new Intent(this,StopwatchActivity.class);//changer
         intent.putExtra("seanceid",tid);
         startActivity(intent);
     }

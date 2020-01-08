@@ -172,7 +172,7 @@ public class DashboardFragment extends Fragment {
                         Toast.makeText(getActivity(), "please entre the numbers in Intensity and repeat times", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    
+
                     String name = seanceName.getInputStr();
 
                     Seance newS = new Seance(name,durations,intencity,repeat,tempExercises);

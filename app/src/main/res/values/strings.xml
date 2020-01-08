@@ -29,4 +29,7 @@
     <string name="in_exercise_name">Nom exercise</string>
     <string name="in_exercise_description">Description exercise</string>
     <string name="afficherSeance">Mes séances</string>
+    <string name="reset"> reset </string>
+    <string name="start"> start </string>
+    <string name="stop"> stop </string>
 </resources>
