@@ -155,7 +155,7 @@ public class CreateTopicActivity extends Activity {
                 e.printStackTrace();
             }
             if (Build.VERSION.SDK_INT >= 24) {
-                imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.CreateTopicActivity", outputImage);
+                imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.MainActivity", outputImage);
             } else {
                 imageUri = Uri.fromFile(outputImage);
             }
@@ -250,7 +250,7 @@ public class CreateTopicActivity extends Activity {
             e.printStackTrace();
         }
         if (Build.VERSION.SDK_INT >= 24) {
-            imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.CreateTopicActivity", outputImage);
+            imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.MainActivity", outputImage);
         } else {
             imageUri = Uri.fromFile(outputImage);
         }
@@ -289,7 +289,7 @@ public class CreateTopicActivity extends Activity {
             e.printStackTrace();
         }
         if (Build.VERSION.SDK_INT >= 24) {
-            imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.CreateTopicActivity", outputImage);
+            imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.MainActivity", outputImage);
         } else {
             imageUri = Uri.fromFile(outputImage);
         }

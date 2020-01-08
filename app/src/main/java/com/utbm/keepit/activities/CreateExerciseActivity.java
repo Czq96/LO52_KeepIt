@@ -254,7 +254,7 @@ public class CreateExerciseActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             if (Build.VERSION.SDK_INT >= 24) {
-                imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.CreateTopicActivity", outputImage);
+                imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.MainActivity", outputImage);
             } else {
                 imageUri = Uri.fromFile(outputImage);
             }
@@ -349,7 +349,7 @@ public class CreateExerciseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         if (Build.VERSION.SDK_INT >= 24) {
-            imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.CreateExerciseActivity", outputImage);
+            imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.MainActivity", outputImage);
         } else {
             imageUri = Uri.fromFile(outputImage);
         }
@@ -388,7 +388,7 @@ public class CreateExerciseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         if (Build.VERSION.SDK_INT >= 24) {
-            imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.CreateExerciseActivity", outputImage);
+            imageUri = FileProvider.getUriForFile(this, "com.utbm.keepit.activities.MainActivity", outputImage);
         } else {
             imageUri = Uri.fromFile(outputImage);
         }
@@ -485,6 +485,7 @@ public class CreateExerciseActivity extends AppCompatActivity {
             exercise.setLevelDifficult(diff);
             exercise.setLevelGroup(group);
             exercise.setTypePublic(type);
+            exercise.setImageResource(imageUri.toString());
 //        exercise.setImageResource();
             long newExerId =  exerciseService.createExercise(exercise);
 

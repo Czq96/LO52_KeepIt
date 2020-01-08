@@ -33,7 +33,7 @@
         <activity android:name=".activities.SeanceListActivity"/>
         <activity android:name=".activities.AfficherSeanceExerciseActivity"/>
         <provider
-            android:authorities="com.utbm.keepit.activities.CreateTopicActivity"
+            android:authorities="com.utbm.keepit.activities.MainActivity"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
