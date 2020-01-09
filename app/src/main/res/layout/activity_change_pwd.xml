@@ -21,6 +21,7 @@
         android:layout_marginTop="@dimen/marginSize"
         app:input_icon="@mipmap/passwd"
         app:input_hint="@string/changepwd_pwdo_hint"
+
         app:is_passwd="true"
         />
     <View
