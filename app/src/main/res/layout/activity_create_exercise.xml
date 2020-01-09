@@ -73,17 +73,18 @@
         android:textSize="@dimen/titleSize"
         android:textColor="@color/infoColor"
         />
-    <Button
-    android:id="@+id/select_topics"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="choisir les topics"/>
 
     <androidx.recyclerview.widget.RecyclerView android:id="@+id/topics_selected"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
     </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+    android:id="@+id/select_topics"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="choisir les thèmes"/>
 
     <Button
         android:id="@+id/take_photo"
@@ -94,17 +95,19 @@
         android:id="@+id/select_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="choisir un photo from album"/>
-    <ImageView
-        android:id="@+id/image_selected"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:text="choisir image vien d'album"/>
     <Button
+        style="@style/commitBtn"
         android:id="@+id/create_exercise"
         android:layout_marginBottom="@dimen/marginSize"
         android:onClick="onCreateExercise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Créer une exercise"/>
+        android:text="Créer une entraînement"/>
+    <ImageView
+        android:id="@+id/image_selected"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+
 </LinearLayout>
 </ScrollView>

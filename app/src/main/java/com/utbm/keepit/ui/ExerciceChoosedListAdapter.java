@@ -52,7 +52,7 @@ public class ExerciceChoosedListAdapter extends RecyclerView.Adapter<ExerciceCho
         holder.exercise_name.setText(exercises.get(position).getName());
         holder.exercise_public.setText("Type:" + exercises.get(position).getTypePublic());
         holder.exercise_level.setText("Level:" + exercises.get(position).getLevelGroup());
-        holder.exercise_diff.setText("Difficulté" + exercises.get(position).getLevelDifficult());
+        holder.exercise_diff.setText("Difficulté:" + exercises.get(position).getLevelDifficult());
         int time = tempSeanceExercise.get(position).getDuration();
         int h = time / 3600;
         int m = time % 3600 / 60;

@@ -1,32 +1,21 @@
 package com.utbm.keepit.ui.dashboard;
 
-import android.app.AlertDialog;
-import android.app.Service;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.utbm.keepit.R;
-import com.utbm.keepit.activities.ChangePwdActivity;
-import com.utbm.keepit.activities.LoginActivity;
 import com.utbm.keepit.activities.MainActivity;
 import com.utbm.keepit.backend.entity.Exercise;
 import com.utbm.keepit.backend.entity.JoinSeanceExercise;
@@ -35,9 +24,7 @@ import com.utbm.keepit.backend.service.ExerciseService;
 import com.utbm.keepit.backend.service.JoinSeanceExerciseService;
 import com.utbm.keepit.backend.service.SeanceService;
 import com.utbm.keepit.ui.ExerciceChoosedListAdapter;
-import com.utbm.keepit.ui.ExerciceListAdapter;
 import com.utbm.keepit.ui.views.InputView;
-import com.utbm.keepit.ui.views.PickerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +83,7 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 //        dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View root = inflater.inflate(R.layout.fragment_seance, container, false);
         // final TextView textView = root.findViewById(R.id.text_dashboard);
         seanceName = root.findViewById(R.id.sceance_name);
         sceanceIntens = root.findViewById(R.id.sceance_intensite);

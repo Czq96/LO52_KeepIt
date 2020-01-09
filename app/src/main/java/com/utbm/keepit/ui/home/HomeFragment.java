@@ -5,12 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,10 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.utbm.keepit.R;
-import com.utbm.keepit.activities.ChangePwdActivity;
 import com.utbm.keepit.activities.CreateTopicActivity;
-import com.utbm.keepit.activities.LoginActivity;
-import com.utbm.keepit.activities.MainActivity;
 import com.utbm.keepit.backend.entity.Topic;
 import com.utbm.keepit.backend.service.TopicService;
 import com.utbm.keepit.ui.TopicListAdapter;
@@ -42,7 +34,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                          ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_topics, container, false);
 
         List<Topic> listTopicData = topicService.findAll();
 

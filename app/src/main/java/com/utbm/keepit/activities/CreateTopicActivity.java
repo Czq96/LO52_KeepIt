@@ -22,11 +22,8 @@ import android.widget.ImageView;
 import com.utbm.keepit.R;
 import com.utbm.keepit.backend.entity.Topic;
 import com.utbm.keepit.backend.service.TopicService;
-import com.utbm.keepit.ui.views.InputView;
-import com.utbm.keepit.utils.GetPathFromUri;
 
 import android.content.Intent;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -40,10 +37,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 //TODO: 从相册选择有问题
-import static com.utbm.keepit.R.layout.fragment_home;
+
 
 public class CreateTopicActivity extends Activity {
 

@@ -28,6 +28,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
     </androidx.recyclerview.widget.RecyclerView>
     <Button
+        style="@style/commitBtn"
         android:layout_marginTop="@dimen/marginSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
