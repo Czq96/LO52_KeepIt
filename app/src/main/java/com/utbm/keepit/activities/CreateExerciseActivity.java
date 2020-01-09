@@ -457,6 +457,7 @@ public class CreateExerciseActivity extends AppCompatActivity {
     }
 
     public void onCreateExercise(View v){
+        //TODO ; change all text in toast with    R.strings.(??)
        // System.out.println("==============================="+ execName.getText().toString());
         if(execName.getText().toString().length()<1){
             Toast.makeText(CreateExerciseActivity.this,"please entre nom de entraînment",Toast.LENGTH_SHORT).show();
@@ -464,51 +465,63 @@ public class CreateExerciseActivity extends AppCompatActivity {
         }else if(execDesc.getText().toString().length()<1){
             Toast.makeText(CreateExerciseActivity.this,"please entre descrption",Toast.LENGTH_SHORT).show();
             return;
+        }else if(topicsToAdd.size()==0){
+            Toast.makeText(CreateExerciseActivity.this,"please choose topics",Toast.LENGTH_SHORT).show();
+            return;
         }
         else{
-//            1.插入exercise  返回 id
-
+            //1.exercise.name existed or not
+//            2.插入exercise  返回 id
             String name=execName.getText().toString();
-            String desc=execDesc.getText().toString();
 
-             Integer diff = ExerciseDataToDesciption.getKey(
-                     ExerciseDataToDesciption.descripDifficult,
-                     diffList.get(spinnerDiff.getSelectedItemPosition()));
-
-            Integer type=ExerciseDataToDesciption.getKey(
-                    ExerciseDataToDesciption.descripPublic,
-                    typeList.get(spinnerDiff.getSelectedItemPosition()));
-
-            Integer group=ExerciseDataToDesciption.getKey(
-                    ExerciseDataToDesciption.descripGroup,
-                    groupList.get(spinnerDiff.getSelectedItemPosition()));
-
-            Exercise exercise=new Exercise();
-            exercise.setDescription(desc);
-            exercise.setName(name);
-            exercise.setLevelDifficult(diff);
-            exercise.setLevelGroup(group);
-            exercise.setTypePublic(type);
-            if(imageUri!=null){
-                exercise.setImageResource(imageUri.toString());
+            if(exerciseService.findByName(name)!=null){
+                Toast.makeText(CreateExerciseActivity.this,"name existed",Toast.LENGTH_SHORT).show();
+                return;
             }
-//        exercise.setImageResource();
-            long newExerId =  exerciseService.createExercise(exercise);
+            else{
+                // if name does not existed
+                String desc=execDesc.getText().toString();
 
-            //插入中间表  2.插入JoinTpicExercise
-            //TODO： -1
-            if(newExerId != -1){
-                for(String s: topicsToAdd){
-                    Long topicId = Long.valueOf(s.split(" : ")[0]);
+                Integer diff = ExerciseDataToDesciption.getKey(
+                        ExerciseDataToDesciption.descripDifficult,
+                        diffList.get(spinnerDiff.getSelectedItemPosition()));
 
-                    JoinTopicExercise jte = new JoinTopicExercise(topicId,newExerId);
-                    jteService.createJoinTopicExercise(jte);
+                Integer type=ExerciseDataToDesciption.getKey(
+                        ExerciseDataToDesciption.descripPublic,
+                        typeList.get(spinnerDiff.getSelectedItemPosition()));
+
+                Integer group=ExerciseDataToDesciption.getKey(
+                        ExerciseDataToDesciption.descripGroup,
+                        groupList.get(spinnerDiff.getSelectedItemPosition()));
+
+                Exercise exercise=new Exercise();
+                exercise.setDescription(desc);
+                exercise.setName(name);
+                exercise.setLevelDifficult(diff);
+                exercise.setLevelGroup(group);
+                exercise.setTypePublic(type);
+                if(imageUri!=null){
+                    exercise.setImageResource(imageUri.toString());
                 }
-                Toast.makeText(CreateExerciseActivity.this,"insert success",Toast.LENGTH_SHORT).show();
-            }
+//        exercise.setImageResource();
+                long newExerId =  exerciseService.createExercise(exercise);
 
-            Intent intent = new Intent(CreateExerciseActivity.this,MainActivity.class);
-            startActivity(intent);
+                //插入中间表  2.插入JoinTpicExercise
+                //TODO： -1
+                if(newExerId != -1){
+                    for(String s: topicsToAdd){
+                        Long topicId = Long.valueOf(s.split(" : ")[0]);
+
+                        JoinTopicExercise jte = new JoinTopicExercise(topicId,newExerId);
+                        jteService.createJoinTopicExercise(jte);
+                    }
+                    Toast.makeText(CreateExerciseActivity.this,"insert success",Toast.LENGTH_SHORT).show();
+                }
+
+                Intent intent = new Intent(CreateExerciseActivity.this,MainActivity.class);
+                startActivity(intent);
+
+            }
 
         }
     }
