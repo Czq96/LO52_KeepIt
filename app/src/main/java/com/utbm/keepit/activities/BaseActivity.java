@@ -47,7 +47,7 @@ public class BaseActivity extends Activity {
         navMe.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BaseActivity.this,ProfileActivity.class));
+                startActivity(new Intent(BaseActivity.this,MainActivity.class));
             }
         });
 

@@ -6,12 +6,21 @@ import android.content.Context;
 import com.utbm.keepit.backend.dao.DaoMaster;
 
 import com.utbm.keepit.backend.dao.DaoSession;
+import com.utbm.keepit.backend.entity.User;
 
 import org.greenrobot.greendao.database.Database;
 
 public class MyApp extends Application {
     private static DaoSession daoSession;
     private static Context context;
+
+    private static User loginUser;
+    public static User getUser(){
+        return loginUser;
+    }
+    public static void setUser(User u){
+        loginUser = u;
+    }
 
     @Override
     public void onCreate() {

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.utbm.keepit.MyApp;
 import com.utbm.keepit.R;
 import com.utbm.keepit.backend.entity.User;
 import com.utbm.keepit.backend.service.UserService;
@@ -56,10 +57,8 @@ public class LoginActivity extends AppCompatActivity {
         String userName = userNameInput.getInputStr();
         String pwd = pwdInput.getInputStr();
 
-//        System.out.println("read from ui: "+ userName);
-//        System.out.println("read from ui: "+ pwd);
-
         if(userService.checkPwd(userName, pwd)==true){
+            MyApp.setUser(userService.findUserByName(userName));
             Intent intent=new Intent(this,MainActivity.class);
             startActivity(intent);
             finish();

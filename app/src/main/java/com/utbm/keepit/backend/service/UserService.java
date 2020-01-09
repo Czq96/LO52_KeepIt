@@ -75,6 +75,18 @@ public class UserService {
             return false;
     }
 
+    public boolean changePwd(User u, String pwd){
+        try{
+            u.setPwd(pwd);
+            userDao.update(u);
+            return true;
+        }
+        catch (Exception e){
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+
     public UserDao getUserDao(){
         return this.userDao;
     }

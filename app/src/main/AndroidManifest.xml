@@ -26,7 +26,6 @@
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.BaseActivity" />
         <activity android:name=".activities.ChangePwdActivity"/>
-        <activity android:name=".activities.ProfileActivity"/>
         <activity android:name=".activities.RegisterActivity"/>
         <activity android:name=".activities.CreateTopicActivity"/>
         <activity android:name=".activities.CreateExerciseActivity" />

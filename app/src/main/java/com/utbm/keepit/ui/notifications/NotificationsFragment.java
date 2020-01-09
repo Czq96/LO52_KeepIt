@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 
+import com.utbm.keepit.MyApp;
 import com.utbm.keepit.R;
 import com.utbm.keepit.activities.ChangePwdActivity;
 import com.utbm.keepit.activities.LoginActivity;
@@ -36,7 +37,7 @@ public class NotificationsFragment extends Fragment {
         userName = root.findViewById(R.id.userName);
 
 
-        userName.setText("admin");
+        userName.setText(MyApp.getUser().getName());
 
 
         return root;
