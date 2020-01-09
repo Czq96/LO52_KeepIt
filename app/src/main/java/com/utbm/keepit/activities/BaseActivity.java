@@ -41,7 +41,7 @@ public class BaseActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                startActivity(new Intent(BaseActivity.this,MainActivity.class));
             }
         });
         navMe.setOnClickListener(new View.OnClickListener(){

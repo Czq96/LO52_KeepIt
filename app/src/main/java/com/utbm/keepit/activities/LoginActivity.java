@@ -59,17 +59,17 @@ public class LoginActivity extends AppCompatActivity {
         String pwd = pwdInput.getInputStr();
 
         if(userName==null){
-            Toast.makeText(LoginActivity.this, R.string.register_name_hint, Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, R.string.no_name, Toast.LENGTH_SHORT).show();
             return ;
         }else if(userName.length()<1 || userName.isEmpty()){
-            Toast.makeText(LoginActivity.this, R.string.register_name_hint, Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, R.string.no_name, Toast.LENGTH_SHORT).show();
             return ;}
 
         if(pwd==null){
-            Toast.makeText(LoginActivity.this, R.string.register_passwd_hint, Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, R.string.no_pwd, Toast.LENGTH_SHORT).show();
             return ;
         }else if(pwd.length()<1||pwd.isEmpty()){
-            Toast.makeText(LoginActivity.this, R.string.register_passwd_hint, Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, R.string.no_pwd, Toast.LENGTH_SHORT).show();
             return ;}
 
         if(userService.checkPwd(userName, pwd)==true){

@@ -35,24 +35,24 @@ public class ChangePwdActivity extends BaseActivity {
 //            String phone=UserHelper.getInstance().getPhone();
 
             if(pwdo==null){
-                Toast.makeText(ChangePwdActivity.this, "please enter the old password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangePwdActivity.this, R.string.no_pwd, Toast.LENGTH_SHORT).show();
                 return ;
             }else if(pwdo.length()<1 || pwdo.isEmpty()){
-                Toast.makeText(ChangePwdActivity.this, "please enter the old password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangePwdActivity.this, R.string.no_pwd, Toast.LENGTH_SHORT).show();
                 return ;}
 
             if(pwdn==null){
-                Toast.makeText(ChangePwdActivity.this, "please enter the new password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangePwdActivity.this, R.string.no_pwd_new, Toast.LENGTH_SHORT).show();
                 return ;
             }else if(pwdn.length()<1||pwdn.isEmpty()){
-                Toast.makeText(ChangePwdActivity.this, "please enter the new password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangePwdActivity.this, R.string.no_pwd_new, Toast.LENGTH_SHORT).show();
                 return ;}
 
             if(pwdc==null){
-                Toast.makeText(ChangePwdActivity.this, "please check password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangePwdActivity.this, R.string.no_pwd_new_chicker, Toast.LENGTH_SHORT).show();
                 return ;
             }else if(pwdc.length()<1||pwdc.isEmpty()){
-                Toast.makeText(ChangePwdActivity.this, "please check password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangePwdActivity.this, R.string.no_pwd_new_chicker, Toast.LENGTH_SHORT).show();
                 return ;}
 
             if(pwdc.equals(pwdn)){

@@ -37,23 +37,23 @@ public class RegisterActivity extends BaseActivity {
 //            System.out.println(pwdConfirm);
         //
         if(name==null){
-            Toast.makeText(RegisterActivity.this, R.string.register_name_hint, Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, R.string.no_name, Toast.LENGTH_SHORT).show();
             return ;
         }else if(name.length()<1 || name.isEmpty()){
-            Toast.makeText(RegisterActivity.this, R.string.register_name_hint, Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, R.string.no_name, Toast.LENGTH_SHORT).show();
             return ;}
         if(pwd==null){
-            Toast.makeText(RegisterActivity.this, R.string.register_passwd_hint, Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, R.string.no_pwd, Toast.LENGTH_SHORT).show();
             return ;
         }else if(pwd.length()<1||pwd.isEmpty()){
-            Toast.makeText(RegisterActivity.this, R.string.register_passwd_hint, Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, R.string.no_pwd, Toast.LENGTH_SHORT).show();
             return ;}
 
         if(pwdConfirm==null){
-            Toast.makeText(RegisterActivity.this, R.string.register_confirm_passwd_hint, Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, R.string.no_pwd_chicker, Toast.LENGTH_SHORT).show();
             return ;
         }else if(pwdConfirm.length()<1||pwdConfirm.isEmpty()){
-            Toast.makeText(RegisterActivity.this, R.string.register_confirm_passwd_hint, Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, R.string.no_pwd_chicker, Toast.LENGTH_SHORT).show();
             return ;}
 
         if(pwd.equals(pwdConfirm)){

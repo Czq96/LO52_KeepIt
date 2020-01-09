@@ -42,4 +42,10 @@
     <string name="FirstExe">C\'est un premier entraînement</string>
     <string name="LastExe">C\'est un dernier entraînement</string>
     <string name="felicitation">Félicitation</string>
+    <string name="no_name">Veuillez entrer Identifiant</string>
+    <string name="no_pwd">Veuillez entrer mot de passe</string>
+    <string name="no_pwd_new">Veuillez entrer nouveau mot de passe</string>
+    <string name="no_pwd_chicker">Veuillez entrer mot de passe à la fois</string>
+    <string name="no_pwd_new_chicker">Veuillez entrer nouveau mot de passe à la fois</string>
+
 </resources>
