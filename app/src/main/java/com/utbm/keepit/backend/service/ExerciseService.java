@@ -46,24 +46,37 @@ public class ExerciseService {
     }
 
     public Exercise findByName(String name){
-//        exerciseDao.
+        try {
+            DaoSession session= MyApp.getDaoSession();
+            long fromId=-1;
+            String strSql="select * from EXERCISE e " +
+                    "where e.NAME = " + name ;
+            Cursor c  = session.getDatabase().rawQuery(strSql,null);
+            Exercise e = new Exercise();
+            if(c.moveToFirst())
+            {
+                e.setId(c.getLong(c.getColumnIndex("_id")));
+                e.setDescription(c.getString(c.getColumnIndex("DESCRIPTION")));
+                e.setName(c.getString(c.getColumnIndex("NAME")));
+                e.setLevelDifficult(c.getInt(c.getColumnIndex("LEVEL_DIFFICULT")));
+                e.setTypePublic(c.getInt(c.getColumnIndex("TYPE_PUBLIC")));
+                e.setLevelGroup(c.getInt(c.getColumnIndex("LEVEL_GROUP")));
+                e.setImageResource(c.getString(c.getColumnIndex("IMAGE_RESOURCE")));
+                c.close();
+              }else{
+                e = null;
+            }
+            return e;
+        }
+        catch (Exception ex)
+        {
+            ex.getMessage();
+        }
         return null;
     }
 
     public List<Exercise> findByTopicId(long topicId){
-        //TODO: 似乎有点小问题  待测试
-    /*QueryBuilder<Exercise> qb = exerciseDao.queryBuilder();
-    Query query = exerciseDao.queryRawCreate(
-            ", GROUP G WHERE G.NAME=? AND T.GROUP_ID=G._ID", "admin";
-    qb.join(JoinTopicExercise.class, JoinTopicExerciseDao.Properties.ExerciseId);
-    qb.join(Topic.class, TopicDao.Properties.Id).where(TopicDao.Properties.Id.eq(topicId));
-    qb.distinct();
-    String strSql = "";
-    qb
-    return qb.queryRaw(Exercise.class, sql, strSql);
-    return qb.list();*/
-        try
-        {
+        try {
             DaoSession session= MyApp.getDaoSession();
             long fromId=-1;
             String strSql="select * from EXERCISE e " +

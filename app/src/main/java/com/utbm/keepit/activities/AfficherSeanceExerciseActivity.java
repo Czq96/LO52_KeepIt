@@ -35,19 +35,9 @@ public class AfficherSeanceExerciseActivity extends AppCompatActivity {
         tid=getIntent().getExtras().getLong("seanceid");
 
         System.out.println("tid: " + tid);
-       //
-        // List<Exercise> listExerciceData = exerciseService.findByTopicId(tid);//TODO : exercice数据源 根据homefragment传过来的id
-       List<ExerciseWithJoinSeance> listExerciceData=exerciseService.findBySceanceId(tid);
+        // Data Type ExerciseWithJoinSeance(Exercise, JoinSeaceExercise)
+        List<ExerciseWithJoinSeance> listExerciceData=exerciseService.findBySceanceId(tid);
         ExerciceList=findViewById(R.id.exercise_list);
-
-//        rvTopic.addItemDecoration(new GridSpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.marginItemSize),rvGrid));
-//        rvTopicItem.setNestedScrollingEnabled(false);
-        System.out.println("listsize "+ listExerciceData.size());
-        for(ExerciseWithJoinSeance ewj: listExerciceData){
-            System.out.println("Exercise data:");
-            System.out.println(ewj.e.getId());
-        }
-
 
         exerciceListAdapter =new ExerciceListWithJoinSeanceAdapter(this,listExerciceData);
         ExerciceList.setLayoutManager(new LinearLayoutManager(this));
@@ -55,7 +45,7 @@ public class AfficherSeanceExerciseActivity extends AppCompatActivity {
         ExerciceList.setAdapter(exerciceListAdapter);
     }
     public void onBtnStart(View v){
-        Intent intent = new Intent(this,StopwatchActivity.class);//changer
+        Intent intent = new Intent(this,StopwatchActivity.class);
         intent.putExtra("seanceid",tid);
         startActivity(intent);
     }
