@@ -100,7 +100,10 @@ public class StopwatchActivity extends AppCompatActivity {
                             ImageView imageView = new ImageView(getApplicationContext());
 //                            System.out.println(uri.toString());
                             //TODO: uri verifier()
-                            if (uri.length() > 1) {
+                            if(uri == null){
+                                imageView.setImageResource(R.mipmap.muscle);
+                            }
+                            else if (uri.length() > 10) {
                                 imageView.setImageURI(Uri.parse(uri));
                             } else {
                                 imageView.setImageResource(R.mipmap.muscle);
