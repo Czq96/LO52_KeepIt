@@ -62,8 +62,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:onClick="onClickprevious"
-        android:textSize="10sp"
-        android:text="previous" />
+        android:textSize="9sp"
+        android:text="précédent" />
         <com.utbm.keepit.ui.views.WEqalsHImageView
             android:layout_marginRight="@dimen/marginSize"
             android:layout_marginLeft="@dimen/marginSize"
@@ -73,9 +73,9 @@
             android:layout_height="wrap_content"/>
     <Button
         android:gravity="center_vertical|center_horizontal"
-        android:text="next"
+        android:text="Suivant"
         android:layout_width="80dp"
-        android:textSize="10sp"
+        android:textSize="9sp"
         android:onClick="onClickNext"
         android:id="@+id/nextExercise"
         android:layout_height="wrap_content"/>

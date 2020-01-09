@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.IdRes;
 
+import com.utbm.keepit.MyApp;
 import com.utbm.keepit.R;
 
 public class BaseActivity extends Activity {
@@ -41,8 +42,13 @@ public class BaseActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BaseActivity.this,MainActivity.class));
-            }
+                if(MyApp.getUser()==null)
+                {
+                    startActivity(new Intent(BaseActivity.this,LoginActivity.class));
+                }else{
+                    startActivity(new Intent(BaseActivity.this,MainActivity.class));
+                }
+                    }
         });
         navMe.setOnClickListener(new View.OnClickListener(){
             @Override

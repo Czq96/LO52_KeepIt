@@ -45,7 +45,7 @@
         android:id="@+id/add_one_exercise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" + Exercise"/>
+        android:text=" + Entraînement"/>
 
     <Button
         style="@style/commitBtn"

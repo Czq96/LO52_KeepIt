@@ -24,6 +24,12 @@ public class LoginActivity extends AppCompatActivity {
     //定义控件
     private InputView userNameInput, pwdInput;
     private Button loginbtn;
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();//注销该方法，相当于重写父类这个方法
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
