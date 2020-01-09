@@ -76,7 +76,7 @@ public class StopwatchActivity extends AppCompatActivity {
 //    onClickprevious" onClickNext
     public void onClickprevious(View view){
         if(i==0){
-            Toast.makeText(StopwatchActivity.this, "this is first exercise", Toast.LENGTH_SHORT).show();
+            Toast.makeText(StopwatchActivity.this, R.string.FirstExe, Toast.LENGTH_SHORT).show();
         }else{
             i--;
             seconds = listExerciceData.get(i).jse.getDuration();
@@ -87,7 +87,7 @@ public class StopwatchActivity extends AppCompatActivity {
 
     public void onClickNext(View view){
         if(i==listExerciceData.size()-1){
-            Toast.makeText(StopwatchActivity.this, "this is the last exercise", Toast.LENGTH_SHORT).show();
+            Toast.makeText(StopwatchActivity.this, R.string.LastExe, Toast.LENGTH_SHORT).show();
         }else{
             i++;
             seconds = listExerciceData.get(i).jse.getDuration();
@@ -151,7 +151,7 @@ public class StopwatchActivity extends AppCompatActivity {
                             if(i==listExerciceData.size()-1){
                                 Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                                 vib.vibrate(2000);
-                                Toast.makeText(StopwatchActivity.this, "félicitation", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(StopwatchActivity.this, R.string.felicitation, Toast.LENGTH_SHORT).show();
                                 running = false;
                             }
                             else if (i < listExerciceData.size()) {

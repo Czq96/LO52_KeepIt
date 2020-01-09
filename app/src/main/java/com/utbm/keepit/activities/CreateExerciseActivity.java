@@ -475,7 +475,7 @@ public class CreateExerciseActivity extends AppCompatActivity {
             String name=execName.getText().toString();
 
             if(exerciseService.findByName(name)!=null){
-                Toast.makeText(CreateExerciseActivity.this,"name existed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateExerciseActivity.this,R.string.IdenExiste,Toast.LENGTH_SHORT).show();
                 return;
             }
             else{
@@ -515,7 +515,7 @@ public class CreateExerciseActivity extends AppCompatActivity {
                         JoinTopicExercise jte = new JoinTopicExercise(topicId,newExerId);
                         jteService.createJoinTopicExercise(jte);
                     }
-                    Toast.makeText(CreateExerciseActivity.this,"insert success",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateExerciseActivity.this,R.string.InsertSucce,Toast.LENGTH_SHORT).show();
                 }
 
                 Intent intent = new Intent(CreateExerciseActivity.this,MainActivity.class);

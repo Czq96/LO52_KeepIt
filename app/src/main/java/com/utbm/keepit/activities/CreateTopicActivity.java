@@ -121,18 +121,18 @@ public class CreateTopicActivity extends Activity {
 
         String topicName = this.topicName.getText().toString();
         if(topicName == null || imageUri==null){
-            Toast.makeText(CreateTopicActivity.this, "Please select image and name of topic", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreateTopicActivity.this, R.string.SelectImgName, Toast.LENGTH_SHORT).show();
         }else{
            // String imagePath = GetPathFromUri.getPath(CreateTopicActivity.this,imageUri);
             Topic t = new Topic(topicName,imageUri.toString());
             if(topicService.createTopic(t))
             {
-                Toast.makeText(CreateTopicActivity.this, "insert success ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateTopicActivity.this, R.string.InsertSucce, Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(this,MainActivity.class);
                 startActivity(intent);
                 finish();
             }else{
-                Toast.makeText(CreateTopicActivity.this, "name existed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateTopicActivity.this, R.string.NameExiste, Toast.LENGTH_SHORT).show();
             }
             //TODO: 创建失败的后果
         }

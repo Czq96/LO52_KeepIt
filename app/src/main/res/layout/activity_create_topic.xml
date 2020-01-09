@@ -15,6 +15,7 @@
         android:layout_marginBottom="@dimen/marginSize"
         android:layout_width="match_parent"
         android:maxLines="1"
+        android:singleLine="true"
         android:layout_height="@dimen/inputViewHeight"
         />
 

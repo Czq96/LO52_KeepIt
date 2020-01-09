@@ -35,21 +35,21 @@ public class RegisterActivity extends BaseActivity {
         String pwdConfirm = inputPwdConfirm.getInputStr();
         if(pwd==pwdConfirm){
             if(userService.findUserByName(name)!=null){
-                Toast.makeText(RegisterActivity.this, "user existed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, R.string.IdenExiste, Toast.LENGTH_SHORT).show();
                 return ;
             }
             else{
                 try{
                     userService.createUser(new User(name, pwd));
-                    Toast.makeText(RegisterActivity.this, "user create success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, R.string.InsertSucce, Toast.LENGTH_SHORT).show();
                 }catch (Exception e){
-                    Toast.makeText(RegisterActivity.this, "Create failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, R.string.InsertEchou, Toast.LENGTH_SHORT).show();
                     return ;
                 }
             }
         }
         else{
-            Toast.makeText(RegisterActivity.this, "different password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, R.string.DiffMot, Toast.LENGTH_SHORT).show();
             return ;
         }
         onBackPressed();
