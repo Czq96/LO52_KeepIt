@@ -54,8 +54,23 @@ public class LoginActivity extends AppCompatActivity {
     public void onCommitClick(View view){
 //        String user=username.getInputStr();
 //        String passwd=pwd.getInputStr();
+
         String userName = userNameInput.getInputStr();
         String pwd = pwdInput.getInputStr();
+
+        if(userName==null){
+            Toast.makeText(LoginActivity.this, R.string.register_name_hint, Toast.LENGTH_SHORT).show();
+            return ;
+        }else if(userName.length()<1 || userName.isEmpty()){
+            Toast.makeText(LoginActivity.this, R.string.register_name_hint, Toast.LENGTH_SHORT).show();
+            return ;}
+
+        if(pwd==null){
+            Toast.makeText(LoginActivity.this, R.string.register_passwd_hint, Toast.LENGTH_SHORT).show();
+            return ;
+        }else if(pwd.length()<1||pwd.isEmpty()){
+            Toast.makeText(LoginActivity.this, R.string.register_passwd_hint, Toast.LENGTH_SHORT).show();
+            return ;}
 
         if(userService.checkPwd(userName, pwd)==true){
             MyApp.setUser(userService.findUserByName(userName));
