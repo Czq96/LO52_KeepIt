@@ -16,6 +16,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.utbm.keepit.R;
@@ -48,7 +49,7 @@ public class CreateTopicActivity extends Activity {
 
     private TopicService topicService = new TopicService();
     //定义控件
-    private InputView topicName;
+    private EditText topicName;
     private Button createTopic,take_photo,select_photo;
     //    private Button takePhoto,selectPhoto, createSeance, cancleCreate;
     public static final int TAKE_PHOTO = 1;
@@ -69,12 +70,12 @@ public class CreateTopicActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_topic);
-        take_photo = (Button) findViewById(R.id.take_photo);
-        select_photo = (Button) findViewById(R.id.select_photo);
-        imageview = (ImageView) findViewById(R.id.image_selected);
-        topicName = (InputView) findViewById(R.id.in_topic_name);
-        createTopic = (Button) findViewById(R.id.create_topic);
-        ret=(ImageView) findViewById(R.id.navBack);
+        take_photo = findViewById(R.id.take_photo);
+        select_photo = findViewById(R.id.select_photo);
+        imageview = findViewById(R.id.image_selected);
+        topicName = findViewById(R.id.in_topic_name);
+        createTopic = findViewById(R.id.create_topic);
+        ret= findViewById(R.id.navBack);
         ret.setVisibility(true?View.VISIBLE:View.GONE);
         ret.setClickable(true);
         ret.setOnClickListener(new View.OnClickListener(){
@@ -118,7 +119,7 @@ public class CreateTopicActivity extends Activity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void insertTopic(){
 
-        String topicName = this.topicName.getInputStr();
+        String topicName = this.topicName.getText().toString();
         if(topicName == null || imageUri==null){
             Toast.makeText(CreateTopicActivity.this, "Please select image and name of topic", Toast.LENGTH_SHORT).show();
         }else{

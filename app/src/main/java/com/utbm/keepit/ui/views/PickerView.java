@@ -115,7 +115,7 @@ public class PickerView extends View
     public void setData(List<String> datas)
     {
         mDataList = datas;
-        mCurrentSelected = 1;
+        mCurrentSelected = 0;
         invalidate();
     }
 

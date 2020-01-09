@@ -70,6 +70,7 @@
             android:layout_height="wrap_content"/>
     <Button
         android:text="next"
+        android:gravity="right"
         android:id="@+id/nextExercise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
