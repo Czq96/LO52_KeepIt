@@ -95,7 +95,7 @@
         android:id="@+id/select_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="choisir image vien d'album"/>
+        android:text="choisir image vient d'album"/>
     <Button
         style="@style/commitBtn"
         android:id="@+id/create_exercise"

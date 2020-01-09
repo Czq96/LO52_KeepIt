@@ -28,7 +28,7 @@
         android:id="@+id/select_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="choisir un photo from album"/>
+        android:text="choisir un photo vient d\'album"/>
     <ImageView
         android:id="@+id/image_selected"
         android:layout_width="match_parent"
@@ -38,6 +38,6 @@
         android:id="@+id/create_topic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Créer un topic"/>
+        android:text="Créer un thème"/>
 
 </LinearLayout>
