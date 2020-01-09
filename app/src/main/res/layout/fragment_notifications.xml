@@ -5,11 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <include layout="@layout/nav_bar"/>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/marginSize"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -32,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/marginSize"
             android:textSize="@dimen/titleSize"
             android:textColor="@color/mainColor"
             android:text="@string/profile_passwd_change"
@@ -41,6 +41,7 @@
         android:id="@+id/afficher_seance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/marginSize"
         android:gravity="center_horizontal"
         android:textSize="@dimen/titleSize"
         android:textColor="@color/mainColor"
@@ -50,7 +51,6 @@
         <Button
             style="@style/commitBtn"
             android:text="@string/logout"
-            android:layout_marginTop="@dimen/marginSize"
             android:id="@+id/btn_logout"
             />
 </LinearLayout>
