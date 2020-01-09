@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">KeepIt</string>
     <string name="login">Se connecter</string>
-    <string name="register">S'inscrire</string>
+    <string name="register">Inscription</string>
     <string name="username_hint">Identifiant</string>
     <string name="passwd_hint">Mot de passe</string>
     <string name="register_name_hint">Veuillez entrer identifiant</string>
