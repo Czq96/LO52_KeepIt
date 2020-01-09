@@ -48,6 +48,13 @@ public class StopwatchActivity extends AppCompatActivity {
 //        super.onBackPressed();//注销该方法，相当于重写父类这个方法
     }
 
+    public void changeImageView(){
+        try{
+            exerImage.setImageURI(Uri.parse(listExerciceData.get(i).e.getImageResource()));
+        }catch(Exception e){
+            exerImage.setImageResource(R.mipmap.muscle);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +62,11 @@ public class StopwatchActivity extends AppCompatActivity {
         tid=getIntent().getExtras().getLong("seanceid");
         listExerciceData=exerciseService.findBySceanceId(tid);
 
-
         exerImage = findViewById(R.id.stopWatchImage);
         previousExe = findViewById(R.id.previousExercise);
         nextExe = findViewById(R.id.nextExercise);
 
-        try{
-            exerImage.setImageURI(Uri.parse(listExerciceData.get(0).e.getImageResource()));
-        }catch(Exception e){
-//                                    Log.println(TAG,e);
-            exerImage.setImageResource(R.mipmap.muscle);
-        }
+        changeImageView();
 
             i =0;
             seconds = listExerciceData.get(i).jse.getDuration();
@@ -79,12 +80,7 @@ public class StopwatchActivity extends AppCompatActivity {
         }else{
             i--;
             seconds = listExerciceData.get(i).jse.getDuration();
-            try{
-                exerImage.setImageURI(Uri.parse(listExerciceData.get(i).e.getImageResource()));
-            }catch(Exception e){
-//                                    Log.println(TAG,e);
-                exerImage.setImageResource(R.mipmap.muscle);
-            }
+            changeImageView();
             running=false;
         }
     }
@@ -95,16 +91,10 @@ public class StopwatchActivity extends AppCompatActivity {
         }else{
             i++;
             seconds = listExerciceData.get(i).jse.getDuration();
-            try{
-                exerImage.setImageURI(Uri.parse(listExerciceData.get(i).e.getImageResource()));
-            }catch(Exception e){
-//                                    Log.println(TAG,e);
-                exerImage.setImageResource(R.mipmap.muscle);
-            }
+            changeImageView();
             running=false;
         }
     }
-
 
     public void onClickStart(View view){ running = true;
         }
@@ -132,7 +122,7 @@ public class StopwatchActivity extends AppCompatActivity {
                 public void run() {
                     Exercise exe = listExerciceData.get(i).e;
                     String uri = listExerciceData.get(i).e.getImageResource();
-                    System.out.println(uri);
+//                    System.out.println(uri);
                     int hours = seconds / 3600;
                     int minutes = (seconds % 3600) / 60;
                     int secs = seconds % 60;
@@ -142,27 +132,22 @@ public class StopwatchActivity extends AppCompatActivity {
                         seconds--;
                         if (seconds > 0) {
 //                        //TODO : 每30s 每 15s
-
-
-
-//                            Toast toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
-//                            toast.setGravity(Gravity.CENTER, 0, 200);
-//                            ImageView imageView = new ImageView(getApplicationContext());
-////                            System.out.println(uri.toString());
-//                            //TODO: uri verifier()
-//                                try{
-//                                    imageView.setImageURI(Uri.parse(uri));
-//                                }catch(Exception e){
-////                                    Log.println(TAG,e);
-//                                    imageView.setImageResource(R.mipmap.muscle);
-//                                }
-////                            }
-//                            LinearLayout toastView = (LinearLayout) toast.getView();
-//                            toastView.setOrientation(LinearLayout.HORIZONTAL);
-//                            toastView.addView(imageView, 0);
-//                            toast.show();
+                            if(seconds % 30 == 0){
+                                int h,m,s;
+                                h= seconds / 3600;
+                                m= seconds%3600 / 60;
+                                s= seconds-3600*h-60*m;
+                                String th="",tm="",ts="";
+                                if(h!=0){th=h+"H ";}
+                                if(m!=0){tm=m+"M ";}
+                                if(s!=0){ts=s+"S ";}
+                                String timeLeft  = "There left "+th+tm+ts;
+                                Toast.makeText(StopwatchActivity.this, timeLeft, Toast.LENGTH_SHORT).show();
+                                Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                                vib.vibrate(1000);
+                            }
                         }
-                        else {// 结束的时候震动
+                        else {// Seance 结束的时候震动
                             if(i==listExerciceData.size()-1){
                                 Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                                 vib.vibrate(2000);
@@ -174,10 +159,9 @@ public class StopwatchActivity extends AppCompatActivity {
                                 vib.vibrate(1000);
                                 i++;
                                 seconds = listExerciceData.get(i).jse.getDuration();
+                                changeImageView();
                             }
-
                         }
-
                     }
                     handler.postDelayed(this, 1000);
 
