@@ -55,24 +55,29 @@
     android:gravity="center_vertical|center_horizontal"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
+
     <Button
-        android:gravity="left"
         android:id="@+id/previousExercise"
-        android:text="previous"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="onClickprevious"
+        android:textSize="10sp"
+        android:text="previous" />
         <com.utbm.keepit.ui.views.WEqalsHImageView
             android:layout_marginRight="@dimen/marginSize"
             android:layout_marginLeft="@dimen/marginSize"
             android:src="@mipmap/muscle"
             android:id="@+id/stopWatchImage"
-            android:layout_width="wrap_content"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"/>
     <Button
+        android:gravity="center_vertical|center_horizontal"
         android:text="next"
-        android:gravity="right"
+        android:layout_width="80dp"
+        android:textSize="10sp"
+        android:onClick="onClickNext"
         android:id="@+id/nextExercise"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>
 <!--    <Button-->
