@@ -39,25 +39,39 @@ public class ExerciceChoosedListAdapter extends RecyclerView.Adapter<ExerciceCho
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 //        System.out.println(exercises.get(position).toString());
 //        System.out.println(exercises.get(position).getImageResource().toString());
-        if(exercises.get(position).getImageResource()== null ){
+        if (exercises.get(position).getImageResource() == null) {
             //  Uri imageUri = Uri.parse((String) str);
             holder.imageView.setImageResource(R.mipmap.muscle);
 
-        }else if(exercises.get(position).getImageResource()== ""||exercises.get(position).getImageResource()== " "){
+        } else if (exercises.get(position).getImageResource() == "" || exercises.get(position).getImageResource() == " ") {
             holder.imageView.setImageResource(R.mipmap.dos);
-        }
-        else{
-            holder.imageView.setImageURI( Uri.parse( exercises.get(position).getImageResource()));
+        } else {
+            holder.imageView.setImageURI(Uri.parse(exercises.get(position).getImageResource()));
 //            android:src="@mipmap/dos"
         }
         holder.exercise_name.setText(exercises.get(position).getName());
-        holder.exercise_public.setText(""+exercises.get(position).getTypePublic());
-        holder.exercise_level.setText(""+exercises.get(position).getLevelGroup());
-        holder.exercise_diff.setText(""+exercises.get(position).getLevelDifficult());
+        holder.exercise_public.setText("Type:" + exercises.get(position).getTypePublic());
+        holder.exercise_level.setText("Level:" + exercises.get(position).getLevelGroup());
+        holder.exercise_diff.setText("Difficulté" + exercises.get(position).getLevelDifficult());
         int time = tempSeanceExercise.get(position).getDuration();
-        float min = (float) time/60;
-        holder.duration.setText(""+ min +" mins");
-    }
+        int h = time / 3600;
+        int m = time % 3600 / 60;
+        int s = time - h * 3600 - m * 60;
+        String hs = "";
+        String ms = "";
+        String ss = "";
+        if (h != 0) {
+            hs = h + "H ";
+        }
+        if (m != 0) {
+            ms = m + "M ";
+        }
+        if (s != 0){
+            ss = s + "S";
+        }
+        holder.duration.setText("Duration:"+hs+ms+ss);
+        }
+
 
     @Override
     public int getItemCount() {

@@ -43,14 +43,15 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="wrap_content">
+
             <TextView
-                android:layout_weight="1"
-                android:layout_width="0dp"
                 android:id="@+id/exercise_public"
-                android:textSize="@dimen/infoSize"
+                android:layout_width="84dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="left"
+                android:layout_weight="1"
                 android:text="public"
-                android:layout_height="wrap_content"/>
+                android:textSize="@dimen/infoSize" />
             <TextView
                 android:id="@+id/exercise_level"
                 android:text="level"

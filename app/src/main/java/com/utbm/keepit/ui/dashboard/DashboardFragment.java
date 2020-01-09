@@ -59,7 +59,9 @@ public class DashboardFragment extends Fragment {
 
     private Button addExercise, createSeance, annuler;
 
-    private InputView seanceName,sceanceDuration, sceanceIntens, sceanceRep;
+    private EditText seanceName, sceanceIntens, sceanceRep;
+    private InputView sceanceDuration;
+
 //    private PickerView hourPick,secondPick,minutePick;
 //    private static String hour= "0",minute = "0",second = "0";
 
@@ -146,14 +148,14 @@ public class DashboardFragment extends Fragment {
                     durations+=jse.getDuration();
                 }
 
-                if(seanceName.getInputStr() == null){
+                if(seanceName.getText() == null){
                     Toast.makeText(getActivity(), "please enter name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if(sceanceIntens.getInputStr().length()<=0){
+                else if(sceanceIntens.getText().length()<=0){
                     Toast.makeText(getActivity(), "please choise intencity", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(sceanceRep.getInputStr().length()<=0){
+                }else if(sceanceRep.getText().length()<=0){
                     Toast.makeText(getActivity(), "please enter repeat times", Toast.LENGTH_SHORT).show();
 //                    if()
                     return;
@@ -166,14 +168,14 @@ public class DashboardFragment extends Fragment {
                     Integer repeat;
 
                     try{
-                        intencity = Integer.parseInt(sceanceIntens.getInputStr());
-                        repeat = Integer.parseInt(sceanceRep.getInputStr());
+                        intencity = Integer.parseInt(sceanceIntens.getText().toString());
+                        repeat = Integer.parseInt(sceanceRep.getText().toString());
                     }catch(Exception e){
                         Toast.makeText(getActivity(), "please entre the numbers in Intensity and repeat times", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    String name = seanceName.getInputStr();
+                    String name = seanceName.getText().toString();
 
                     Seance newS = new Seance(name,durations,intencity,repeat,tempExercises);
                     Long seanceId = seanceService.createSeance(newS);

@@ -12,49 +12,30 @@
     android:orientation="vertical"
     >
 
-
-    <com.utbm.keepit.ui.views.InputView
+    <EditText
+        android:textSize="@dimen/inputTitleSize"
         android:id="@+id/sceance_name"
+        android:hint="Nom:"
+        android:layout_marginBottom="@dimen/marginSize"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputViewHeight"
-
-        app:input_hint="Nom: "
-        app:is_passwd="false"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="47dp" />
-
-    <View
-        style="@style/line"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/sceance_name" />
-
-    <com.utbm.keepit.ui.views.InputView
+        />
+    <EditText
+        android:textSize="@dimen/inputTitleSize"
         android:id="@+id/sceance_intensite"
+        android:hint="Intensité:"
+        android:layout_marginBottom="@dimen/marginSize"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputViewHeight"
-
-        app:input_hint="@string/sceance_intensite"
-        app:is_passwd="false"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="47dp" />
-    <View
-        style="@style/line"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/sceance_intensite" />
-    <com.utbm.keepit.ui.views.InputView
+        />
+    <EditText
+        android:textSize="@dimen/inputTitleSize"
         android:id="@+id/sceance_nombre"
+        android:hint="Nombre de répétition:"
+        android:layout_marginBottom="@dimen/marginSize"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputViewHeight"
-
-        app:input_hint="@string/sceance_nombre"
-        app:is_passwd="false"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="47dp" />
-    <View
-        style="@style/line"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/sceance_nombre" />
-
+        />
     <androidx.recyclerview.widget.RecyclerView android:id="@+id/exercise_choosed"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
