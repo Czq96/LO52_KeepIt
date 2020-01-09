@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.utbm.keepit.R;
+import com.utbm.keepit.backend.entity.ExerciseDataToDesciption;
 import com.utbm.keepit.backend.service.ExerciseWithJoinSeance;
 
 import java.util.List;
@@ -46,9 +47,9 @@ public class ExerciceListWithJoinSeanceAdapter extends RecyclerView.Adapter<Exer
 //            android:src="@mipmap/dos"
         }
         holder.exercise_name.setText(exercises.get(position).e.getName());
-        holder.exercise_public.setText("Type:"+exercises.get(position).e.getTypePublic());
-        holder.exercise_level.setText("Level:"+exercises.get(position).e.getLevelGroup());
-        holder.exercise_diff.setText("Diffculité:"+exercises.get(position).e.getLevelDifficult());
+        holder.exercise_public.setText("Type:" + ExerciseDataToDesciption.descripPublic.get(exercises.get(position).e.getTypePublic()));
+        holder.exercise_level.setText("Level:" + ExerciseDataToDesciption.descripGroup.get(exercises.get(position).e.getLevelGroup()));
+        holder.exercise_diff.setText("Difficulté:" + ExerciseDataToDesciption.descripDifficult.get(exercises.get(position).e.getLevelDifficult()));
         holder.exercise_duration.setText("Duration:"+exercises.get(position).jse.getDuration()+" s");
     }
 

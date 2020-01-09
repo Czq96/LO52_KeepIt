@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.utbm.keepit.R;
 import com.utbm.keepit.backend.entity.Exercise;
+import com.utbm.keepit.backend.entity.ExerciseDataToDesciption;
 
 import java.util.List;
 
@@ -46,9 +47,9 @@ public class ExerciceListAdapter extends RecyclerView.Adapter<ExerciceListAdapte
 //            android:src="@mipmap/dos"
         }
         holder.exercise_name.setText(exercises.get(position).getName());
-        holder.exercise_public.setText("Type:"+exercises.get(position).getTypePublic());
-        holder.exercise_level.setText("Level:"+exercises.get(position).getLevelGroup());
-        holder.exercise_diff.setText("Diffculité:"+exercises.get(position).getLevelDifficult());
+        holder.exercise_public.setText("Type:" + ExerciseDataToDesciption.descripPublic.get(exercises.get(position).getTypePublic()));
+        holder.exercise_level.setText("Level:" + ExerciseDataToDesciption.descripGroup.get(exercises.get(position).getLevelGroup()));
+        holder.exercise_diff.setText("Difficulté:" + ExerciseDataToDesciption.descripDifficult.get(exercises.get(position).getLevelDifficult()));
     }
 
     @Override

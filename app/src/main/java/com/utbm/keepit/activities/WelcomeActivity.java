@@ -27,8 +27,8 @@ public class WelcomeActivity extends Activity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                //toLogin();
-                toMain();
+                toLogin();
+//                toMain();
             }
         },3*1000);
     }
