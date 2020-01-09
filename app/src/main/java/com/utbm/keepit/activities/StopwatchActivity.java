@@ -141,7 +141,7 @@ public class StopwatchActivity extends AppCompatActivity {
                                 if(h!=0){th=h+"H ";}
                                 if(m!=0){tm=m+"M ";}
                                 if(s!=0){ts=s+"S ";}
-                                String timeLeft  = "There left "+th+tm+ts;
+                                String timeLeft  = "Il reste "+th+tm+ts;
                                 Toast.makeText(StopwatchActivity.this, timeLeft, Toast.LENGTH_SHORT).show();
                                 Vibrator vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                                 vib.vibrate(1000);
